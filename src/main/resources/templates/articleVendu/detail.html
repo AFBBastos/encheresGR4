@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventes | Détail</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+</head>
+<body class="ui container">
+
+    <h1 class="ui center aligned header">Détail vente</h1>
+
+    <div th:if="${articleVendu.etatVente} eq 'Enchères terminées'">
+        <div th:if="${currentUser.noUtilisateur} eq ${articleVendu.utilisateur.noUtilisateur}">
+            <h1 class="ui center aligned header">Vous avez remporté la vente</h1>
+        </div>
+        <div th:if="${currentUser.noUtilisateur} neq ${articleVendu.utilisateur.noUtilisateur}">
+            <h1 class="ui center aligned header" th:text="${articleVendu.utilisateur.pseudo} + ' a remporté la vente'"></h1>
+        </div>
+    </div>
+
+    <div class="ui two column stackable grid segment">
+        <div class="four wide column">
+            <img class="ui medium image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PS2-Versions.png/800px-PS2-Versions.png" alt="Image de la ps2">
+        </div>
+        <div class="twelve wide column">
+            <div class="segment">
+                <h1 class="ui header" th:text="${articleVendu.nomArticle}"></h1>
+                <p class="ui text">Description : <span th:text="${articleVendu.description}"></span></p>
+                <div class="" th:if="${articleVendu.etatVente} eq 'En cours'">
+                    <p class="ui text">Categorie : <span th:text="${articleVendu.categorie.getLibelle()}"></span></p>
+                    <p class="ui text"></p>
+                </div>
+                <p class="ui text">Meilleur offre :
+                    <span th:if="${dernierEnchere} == null">
+                        <span th:text="${articleVendu.prixVente}"></span>
+                    pts
+                    </span>
+                    <span th:if="${dernierEnchere} != null">
+                        <span th:text="${dernierEnchere.montant_enchere} + ' pts par ' + ${dernierEnchere.utilisateur.pseudo}"></span>
+                    </span>
+                </p>
+                <p class="ui text">Mise à prix : <span th:text="${articleVendu.miseAPrix}"></span> pts</p>
+                <div class="" th:if="${articleVendu.etatVente} eq 'En cours'">
+                    <p class="ui text">Début de l'enchère : <span th:text="${#dates.format(articleVendu.dateDebutEncheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                    <p class="ui text">Fin de l'enchère : <span th:text="${#dates.format(articleVendu.dateFinEncheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                    <p class="ui text"></p>
+                </div>
+                <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
+                <p class="ui text">Vendeur : <span th:text="${articleVendu.utilisateur.pseudo}"></span></p>
+                <form class="ui form" th:object="${enchere}" method="post" th:if="${currentUser.noUtilisateur} neq ${articleVendu.utilisateur.noUtilisateur} and ${articleVendu.etatVente} eq 'En cours'">
+                    <div class="field">
+                        <div class="three wide field">
+                            <label for="proposition">Ma proposition : </label>
+                            <input id="proposition" type="number" th:field="*{montant_enchere}" th:value="${articleVendu.prixVente}">
+                        </div>
+                        <button class="ui inverted green button">Enchérir</button>
+                    </div>
+                </form>
+                <a class="ui inverted blue button" th:if="${currentUser.noUtilisateur} eq ${articleVendu.utilisateur.noUtilisateur} and ${articleVendu.etatVente} eq 'En cours'">Modifier</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
