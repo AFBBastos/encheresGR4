@@ -31,6 +31,7 @@ public class ArticleVenduController {
     @GetMapping()
     public String listeArticleVendu(Model model) {
 
+
         Utilisateur utilisateur = new Utilisateur(1, "CLmrch", "Lmrch", "Cloé", "lmrch@gmail.com", "0123456789", "Jacques prévert", "44220", "Coueron", "azerty1234", 200, false);
         Categorie informatique = new Categorie(1, "Informatique");
         Categorie vetement = new Categorie(2, "Vêtement");
@@ -44,6 +45,7 @@ public class ArticleVenduController {
 
         model.addAttribute("articlesVendus", articlesVendusService.findAllArticleVendu());
         model.addAttribute("categories", categorieService.findAllCategorie());
+        model.addAttribute("currentUser", utilisateur);
         return "articleVendu/liste";
     }
 
