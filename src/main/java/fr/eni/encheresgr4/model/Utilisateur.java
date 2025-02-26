@@ -1,6 +1,6 @@
 package fr.eni.encheresgr4.model;
 
-class Utilisateur{
+public class Utilisateur{
     private int noUtilisateur;
     private String pseudo;
     private String nom;
@@ -12,7 +12,7 @@ class Utilisateur{
     private String ville;
     private String motDePasse;
     private int credit;
-    private String administrateur;
+    private Boolean administrateur;
 
     public Utilisateur(int noUtilisateur,
                        String pseudo,
@@ -25,7 +25,7 @@ class Utilisateur{
                        String ville,
                        String motDePasse,
                        int credit,
-                       String administrateur) {
+                       Boolean administrateur) {
         this.noUtilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
@@ -37,7 +37,7 @@ class Utilisateur{
         this.ville = ville;
         this.motDePasse = motDePasse;
         this.credit = credit;
-        this.administrateur = administrateur;
+        this.administrateur = Boolean.valueOf(administrateur);
     }
 
     public Utilisateur() {
@@ -131,11 +131,11 @@ class Utilisateur{
         this.credit = credit;
     }
 
-    public String getAdministrateur() {
+    public Boolean getAdministrateur() {
         return administrateur;
     }
 
-    public void setAdministrateur(String administrateur) {
+    public void setAdministrateur(Boolean administrateur) {
         this.administrateur = administrateur;
     }
 
