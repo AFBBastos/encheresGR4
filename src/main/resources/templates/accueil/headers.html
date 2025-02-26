@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+    <header th:fragment="commonHeader">
+        <nav>
+            <div style="display:inline-block;">
+                <h1>ENI-Encheres</h1>
+            </div>
+            <div style="display:inline-block;float:right; margin-top:10px;">
+                <a href="/">Enchères</a>
+                - <a href="/ajouter">Vendre un article</a>
+                - <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
+                - <a href="/connexion">Déconnexion</a>
+            </div>
+        </nav>
+    </header>
+ </body>
+</html>
