@@ -3,28 +3,28 @@ package fr.eni.encheresgr4.model;
 import java.util.Date;
 
 public class Enchere {
-    private Date dateEnchere;
+    private Date date_enchere;
     private int montant_enchere;
 
-    private Utilisateur utilisateur;
-    private ArticleVendu articleVendu;
-
-    public Enchere(Date dateEnchere, int montant_enchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
-        this.dateEnchere = dateEnchere;
-        this.montant_enchere = montant_enchere;
-        this.utilisateur = utilisateur;
-        this.articleVendu = articleVendu;
-    }
+    private Utilisateur no_utilisateur;
+    private ArticleVendu no_article;
 
     public Enchere() {
     }
 
-    public Date getDateEnchere() {
-        return dateEnchere;
+    public Enchere(Date date_enchere, int montant_enchere, Utilisateur no_utilisateur, ArticleVendu no_article) {
+        this.date_enchere = date_enchere;
+        this.montant_enchere = montant_enchere;
+        this.no_utilisateur = no_utilisateur;
+        this.no_article = no_article;
     }
 
-    public void setDateEnchere(Date dateEnchere) {
-        this.dateEnchere = dateEnchere;
+    public Date getDate_enchere() {
+        return date_enchere;
+    }
+
+    public void setDate_enchere(Date date_enchere) {
+        this.date_enchere = date_enchere;
     }
 
     public int getMontant_enchere() {
@@ -35,10 +35,26 @@ public class Enchere {
         this.montant_enchere = montant_enchere;
     }
 
+    public Utilisateur getNo_utilisateur() {
+        return no_utilisateur;
+    }
+
+    public void setNo_utilisateur(Utilisateur no_utilisateur) {
+        this.no_utilisateur = no_utilisateur;
+    }
+
+    public ArticleVendu getNo_article() {
+        return no_article;
+    }
+
+    public void setNo_article(ArticleVendu no_article) {
+        this.no_article = no_article;
+    }
+
     @Override
     public String toString() {
         return "Enchere{" +
-                "dateEnchere=" + dateEnchere +
+                "dateEnchere=" + date_enchere +
                 ", montant_enchere=" + montant_enchere +
                 '}';
     }

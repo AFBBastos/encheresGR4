@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des articles vendus</title>
+</head>
+
+<body class="ui container">
+    <div class="ui center aligned icon header">
+        <form th:action="@{'/ventes/rechercher'}" method="post">
+            <div class="ui input">
+                <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
+            </div>
+
+            <select class="ui selection dropdown" id="categorie-select" name="categorie-select">
+                <option value="0">Pas de catégorie sélectionnée</option>
+                <option th:each="categorie : ${categories}"
+                        th:text="${categorie.libelle}"
+                        th:value="${categorie.no_categorie}">
+                </option>
+            </select>
+
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+
+    <div class="ui link cards">
+        <div class="card" th:each="articleVendu : ${articlesVendus}">
+            <div class="image">
+<!--                <img th:alt="'image_'.${articleVendu.nomArticle}" th:src="'/static/'.${articleVendu.noArticle}.'.png'">-->
+            </div>
+            <div class="content">
+                <div class="header"><a th:href="@{/ventes/{id}(id=${articleVendu.no_article})}" th:text="${articleVendu.nom_article}"></a></div>
+                <div class="description">
+                    Prix : <th th:text="${articleVendu.prix_initial}"></th> points <br/>
+                    Fin de l'enchère : <th th:text="${articleVendu.date_fin_encheres}"></th>
+                </div>
+            </div>
+            <div class="extra content">
+      <span class="right floated">
+        Vendeur : <a th:href="@{/utilisateur/{id}(id=${articleVendu.no_utilisateur.no_utilisateur})}" th:text="${articleVendu.no_utilisateur.pseudo}"></a>
+      </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,18 +1,18 @@
 package fr.eni.encheresgr4.model;
 
 public class Utilisateur{
-    private int noUtilisateur;
+    private int no_utilisateur;
     private String pseudo;
     private String nom;
     private String prenom;
     private String email;
     private String telephone;
     private String rue;
-    private String codePostal;
+    private String code_postal;
     private String ville;
-    private String motDePasse;
+    private String mot_de_passe;
     private int credit;
-    private Boolean administrateur;
+    private boolean administrateur;
 
     public Utilisateur(int noUtilisateur,
                        String pseudo,
@@ -21,34 +21,34 @@ public class Utilisateur{
                        String email,
                        String telephone,
                        String rue,
-                       String codePostal,
+                       String code_postal,
                        String ville,
-                       String motDePasse,
+                       String mot_de_passe,
                        int credit,
-                       Boolean administrateur) {
-        this.noUtilisateur = noUtilisateur;
+                       boolean administrateur) {
+        this.no_utilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.telephone = telephone;
         this.rue = rue;
-        this.codePostal = codePostal;
+        this.code_postal = code_postal;
         this.ville = ville;
-        this.motDePasse = motDePasse;
+        this.mot_de_passe = mot_de_passe;
         this.credit = credit;
-        this.administrateur = Boolean.valueOf(administrateur);
+        this.administrateur = administrateur;
     }
 
     public Utilisateur() {
     }
 
-    public int getNoUtilisateur() {
-        return noUtilisateur;
+    public int getNo_utilisateur() {
+        return no_utilisateur;
     }
 
-    public void setNoUtilisateur(int noUtilisateur) {
-        this.noUtilisateur = noUtilisateur;
+    public void setNo_utilisateur(int no_utilisateur) {
+        this.no_utilisateur = no_utilisateur;
     }
 
     public String getPseudo() {
@@ -99,12 +99,12 @@ public class Utilisateur{
         this.rue = rue;
     }
 
-    public String getCodePostal() {
-        return codePostal;
+    public String getCode_postal() {
+        return code_postal;
     }
 
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
+    public void setCode_postal(String code_postal) {
+        this.code_postal = code_postal;
     }
 
     public String getVille() {
@@ -115,12 +115,12 @@ public class Utilisateur{
         this.ville = ville;
     }
 
-    public String getMotDePasse() {
-        return motDePasse;
+    public String getMot_de_passe() {
+        return mot_de_passe;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setMot_de_passe(String mot_de_passe) {
+        this.mot_de_passe = mot_de_passe;
     }
 
     public int getCredit() {
@@ -131,27 +131,27 @@ public class Utilisateur{
         this.credit = credit;
     }
 
-    public Boolean getAdministrateur() {
+    public boolean isAdministrateur() {
         return administrateur;
     }
 
-    public void setAdministrateur(Boolean administrateur) {
+    public void setAdministrateur(boolean administrateur) {
         this.administrateur = administrateur;
     }
 
     @Override
     public String toString() {
         return "Utilisateur{" +
-                "noUtilisateur=" + noUtilisateur +
+                "noUtilisateur=" + no_utilisateur +
                 ", pseudo='" + pseudo + '\'' +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", rue='" + rue + '\'' +
-                ", codePostal='" + codePostal + '\'' +
+                ", codePostal='" + code_postal + '\'' +
                 ", ville='" + ville + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
+                ", motDePasse='" + mot_de_passe + '\'' +
                 ", credit=" + credit +
                 ", administrateur='" + administrateur + '\'' +
                 '}';
