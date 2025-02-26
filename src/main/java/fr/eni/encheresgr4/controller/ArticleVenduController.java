@@ -36,7 +36,6 @@ public class ArticleVenduController {
         Categorie vetement = new Categorie(2, "Vêtement");
         ArticleVendu articleVendu1 = new ArticleVendu(1,"PS2","Playstation 2, en bon état", new Date(), new Date(), 100, 100, "En cours", informatique, utilisateur);
         ArticleVendu articleVendu2 = new ArticleVendu(2,"T-shirt Kiabi","T-shirt Kiabi blanc, taille M", new Date(), new Date(), 10, 10, "En cours", vetement, utilisateur);
-        System.out.println("dans listeArticleVendu");
 
         articlesVendusService.ajouterArticleVendu(articleVendu1);
         articlesVendusService.ajouterArticleVendu(articleVendu2);
