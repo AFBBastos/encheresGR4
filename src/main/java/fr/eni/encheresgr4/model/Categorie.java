@@ -2,23 +2,23 @@ package fr.eni.encheresgr4.model;
 
 public class Categorie {
 
-    private int noCategorie;
+    private int no_categorie;
     private String libelle;
 
     public Categorie(int noCategorie, String libelle) {
-        this.noCategorie = noCategorie;
+        this.no_categorie = noCategorie;
         this.libelle = libelle;
     }
 
     public Categorie() {
     }
 
-    public int getNoCategorie() {
-        return noCategorie;
+    public int getNo_categorie() {
+        return no_categorie;
     }
 
-    public void setNoCategorie(int noCategorie) {
-        this.noCategorie = noCategorie;
+    public void setNo_categorie(int no_categorie) {
+        this.no_categorie = no_categorie;
     }
 
     public String getLibelle() {
@@ -32,7 +32,7 @@ public class Categorie {
     @Override
     public String toString() {
         return "Categorie{" +
-                "noCategorie='" + noCategorie + '\'' +
+                "noCategorie='" + no_categorie + '\'' +
                 ", libelle='" + libelle + '\'' +
                 '}';
     }

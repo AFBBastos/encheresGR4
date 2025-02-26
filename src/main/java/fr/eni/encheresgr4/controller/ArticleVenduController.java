@@ -36,7 +36,6 @@ public class ArticleVenduController {
         Categorie vetement = new Categorie(2, "Vêtement");
         ArticleVendu articleVendu1 = new ArticleVendu(1,"PS2","Playstation 2, en bon état", new Date(), new Date(), 100, 100, "En cours", informatique, utilisateur);
         ArticleVendu articleVendu2 = new ArticleVendu(2,"T-shirt Kiabi","T-shirt Kiabi blanc, taille M", new Date(), new Date(), 10, 10, "En cours", vetement, utilisateur);
-        System.out.println("dans listeArticleVendu");
 
         articlesVendusService.ajouterArticleVendu(articleVendu1);
         articlesVendusService.ajouterArticleVendu(articleVendu2);
@@ -71,7 +70,7 @@ public class ArticleVenduController {
         Utilisateur utilisateur = new Utilisateur(1, "Noix", "HRV", "Noä", "noa.hervieu2024@campus-eni.fr", "0123456789", "6 rue de la chose", "44100", "Nantes", "Mot2p@ssTè6qrizé", 200, true);
         Categorie categorie = new Categorie(1, "Gaming");
         ArticleVendu articleVendu = new ArticleVendu(1, "PS2", "PlayStation 2", dateFormat.parse("2025-02-20 14:00:00"), dateFormat.parse("2025-02-23 14:00:00"), 50, 50, "En cours", categorie, utilisateur);
-        Retrait retrait = new Retrait("5 rue du truc", "4400", "Nantes", articleVendu);
+        Retrait retrait = new Retrait("5 rue du truc", "4400", "Nantes", articleVendu.getNo_article());
         articleVendu.setLieuRetrait(retrait);
 
         Enchere dernierEnchere = null;
