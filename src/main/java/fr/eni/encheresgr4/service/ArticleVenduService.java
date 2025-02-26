@@ -21,17 +21,16 @@ public class ArticleVenduService {
     }
 
     public List<ArticleVendu> findAllArticleVendu() {
-        // TODO Auto-generated method stub
         return articlesVendus;
     }
 
     public List<ArticleVendu> listAllArticleVenduByName(String filterName, int filterCategory) {
         List<ArticleVendu> articleVendusByName = new ArrayList<>();
         for (ArticleVendu articleVendu : articlesVendus){
-            String nomArticleVendu = articleVendu.getNomArticle().toLowerCase();
+            String nomArticleVendu = articleVendu.getNom_article().toLowerCase();
             filterName = filterName.toLowerCase();
             if(nomArticleVendu.contains(filterName) ) {
-                if(filterCategory == 0 || filterCategory == articleVendu.getCategorie().getNoCategorie()){
+                if(filterCategory == 0 || filterCategory == articleVendu.getNo_categorie().getNo_categorie()){
                     articleVendusByName.add(articleVendu);
                 }
             }

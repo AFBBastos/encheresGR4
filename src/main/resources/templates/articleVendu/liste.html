@@ -21,7 +21,7 @@
                 <option value="0">Pas de catégorie sélectionnée</option>
                 <option th:each="categorie : ${categories}"
                         th:text="${categorie.libelle}"
-                        th:value="${categorie.noCategorie}">
+                        th:value="${categorie.no_categorie}">
                 </option>
             </select>
 
@@ -35,15 +35,15 @@
 <!--                <img th:alt="'image_'.${articleVendu.nomArticle}" th:src="'/static/'.${articleVendu.noArticle}.'.png'">-->
             </div>
             <div class="content">
-                <div class="header"><a th:href="@{/ventes/{id}(id=${articleVendu.noArticle})}" th:text="${articleVendu.nomArticle}"></a></div>
+                <div class="header"><a th:href="@{/ventes/{id}(id=${articleVendu.no_article})}" th:text="${articleVendu.nom_article}"></a></div>
                 <div class="description">
-                    Prix : <th th:text="${articleVendu.miseAPrix}"></th> points <br/>
-                    Fin de l'enchère : <th th:text="${articleVendu.dateFinEncheres}"></th>
+                    Prix : <th th:text="${articleVendu.prix_initial}"></th> points <br/>
+                    Fin de l'enchère : <th th:text="${articleVendu.date_fin_encheres}"></th>
                 </div>
             </div>
             <div class="extra content">
       <span class="right floated">
-        Vendeur : <a th:href="@{/utilisateur/{id}(id=${articleVendu.utilisateur.noUtilisateur})}" th:text="${articleVendu.utilisateur.pseudo}"></a>
+        Vendeur : <a th:href="@{/utilisateur/{id}(id=${articleVendu.no_utilisateur.no_utilisateur})}" th:text="${articleVendu.no_utilisateur.pseudo}"></a>
       </span>
             </div>
         </div>

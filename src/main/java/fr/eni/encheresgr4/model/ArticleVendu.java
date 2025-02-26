@@ -4,80 +4,80 @@ import java.util.Date;
 
 public class ArticleVendu {
 
-    private int noArticle;
-    private String nomArticle;
+    private int no_article;
+    private String nom_article;
     private String description;
-    private Date dateDebutEncheres;
-    private Date dateFinEncheres;
-    private int miseAPrix;
-    private int prixVente;
-    private String etatVente;
+    private Date date_debut_encheres;
+    private Date date_fin_encheres;
+    private int prix_initial;
+    private int prix_vente;
+    private String etat_vente;
 
-    private Categorie categorie;
+    private Categorie no_categorie;
     private Retrait lieuRetrait;
-    private Utilisateur utilisateur;
+    private Utilisateur no_utilisateur;
 
-    public ArticleVendu(int noArticle,
-                        String nomArticle,
+    public ArticleVendu(int no_article,
+                        String nom_article,
                         String description,
-                        Date dateDebutEncheres,
-                        Date dateFinEncheres,
-                        int miseAPrix,
-                        int prixVente,
-                        String etatVente,
-                        Categorie categorie,
-                        Utilisateur utilisateur) {
-        this.noArticle = noArticle;
-        this.nomArticle = nomArticle;
+                        Date date_debut_encheres,
+                        Date date_fin_encheres,
+                        int prix_initial,
+                        int prix_vente,
+                        String etat_vente,
+                        Categorie no_categorie,
+                        Utilisateur no_utilisateur) {
+        this.no_article = no_article;
+        this.nom_article = nom_article;
         this.description = description;
-        this.dateDebutEncheres = dateDebutEncheres;
-        this.dateFinEncheres = dateFinEncheres;
-        this.miseAPrix = miseAPrix;
-        this.prixVente = prixVente;
-        this.etatVente = etatVente;
-        this.categorie = categorie;
-        this.utilisateur = utilisateur;
+        this.date_debut_encheres = date_debut_encheres;
+        this.date_fin_encheres = date_fin_encheres;
+        this.prix_initial = prix_initial;
+        this.prix_vente = prix_vente;
+        this.etat_vente = etat_vente;
+        this.no_categorie = no_categorie;
+        this.no_utilisateur = no_utilisateur;
     }
 
-    public ArticleVendu(int noArticle,
-                        String nomArticle,
+    public ArticleVendu(int no_article,
+                        String nom_article,
                         String description,
-                        Date dateDebutEncheres,
-                        Date dateFinEncheres,
-                        int miseAPrix,
-                        int prixVente,
-                        String etatVente,
-                        Categorie categorie,
+                        Date date_debut_encheres,
+                        Date date_fin_encheres,
+                        int prix_initial,
+                        int prix_vente,
+                        String etat_vente,
+                        Categorie no_categorie,
                         Retrait lieuRetrait) {
-        this.noArticle = noArticle;
-        this.nomArticle = nomArticle;
+        this.no_article = no_article;
+        this.nom_article = nom_article;
         this.description = description;
-        this.dateDebutEncheres = dateDebutEncheres;
-        this.dateFinEncheres = dateFinEncheres;
-        this.miseAPrix = miseAPrix;
-        this.prixVente = prixVente;
-        this.etatVente = etatVente;
-        this.categorie = categorie;
+        this.date_debut_encheres = date_debut_encheres;
+        this.date_fin_encheres = date_fin_encheres;
+        this.prix_initial = prix_initial;
+        this.prix_vente = prix_vente;
+        this.etat_vente = etat_vente;
+        this.no_categorie = no_categorie;
         this.lieuRetrait = lieuRetrait;
     }
 
     public ArticleVendu() {
     }
 
-    public int getNoArticle() {
-        return noArticle;
+    public int getNo_article() {
+        return no_article;
     }
 
-    public void setNoArticle(int noArticle) {
-        this.noArticle = noArticle;
+    public void setNo_article(int no_article) {
+        this.no_article = no_article;
     }
 
-    public String getNomArticle() {
-        return nomArticle;
+    public String getNom_article() {
+        return nom_article;
     }
 
-    public void setNomArticle(String nomArticle) {
-        this.nomArticle = nomArticle;
+    public void setNom_article(String nom_article) {
+        this.nom_article = nom_article;
     }
 
     public String getDescription() {
@@ -88,52 +88,52 @@ public class ArticleVendu {
         this.description = description;
     }
 
-    public Date getDateDebutEncheres() {
-        return dateDebutEncheres;
+    public Date getDate_debut_encheres() {
+        return date_debut_encheres;
     }
 
-    public void setDateDebutEncheres(Date dateDebutEncheres) {
-        this.dateDebutEncheres = dateDebutEncheres;
+    public void setDate_debut_encheres(Date date_debut_encheres) {
+        this.date_debut_encheres = date_debut_encheres;
     }
 
-    public Date getDateFinEncheres() {
-        return dateFinEncheres;
+    public Date getDate_fin_encheres() {
+        return date_fin_encheres;
     }
 
-    public void setDateFinEncheres(Date dateFinEncheres) {
-        this.dateFinEncheres = dateFinEncheres;
+    public void setDate_fin_encheres(Date date_fin_encheres) {
+        this.date_fin_encheres = date_fin_encheres;
     }
 
-    public int getMiseAPrix() {
-        return miseAPrix;
+    public int getPrix_initial() {
+        return prix_initial;
     }
 
-    public void setMiseAPrix(int miseAPrix) {
-        this.miseAPrix = miseAPrix;
+    public void setPrix_initial(int prix_initial) {
+        this.prix_initial = prix_initial;
     }
 
-    public int getPrixVente() {
-        return prixVente;
+    public int getPrix_vente() {
+        return prix_vente;
     }
 
-    public void setPrixVente(int prixVente) {
-        this.prixVente = prixVente;
+    public void setPrix_vente(int prix_vente) {
+        this.prix_vente = prix_vente;
     }
 
-    public String getEtatVente() {
-        return etatVente;
+    public String getEtat_vente() {
+        return etat_vente;
     }
 
-    public void setEtatVente(String etatVente) {
-        this.etatVente = etatVente;
+    public void setEtat_vente(String etat_vente) {
+        this.etat_vente = etat_vente;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public Categorie getNo_categorie() {
+        return no_categorie;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setNo_categorie(Categorie no_categorie) {
+        this.no_categorie = no_categorie;
     }
 
     public Retrait getLieuRetrait() {
@@ -144,25 +144,25 @@ public class ArticleVendu {
         this.lieuRetrait = lieuRetrait;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public Utilisateur getNo_utilisateur() {
+        return no_utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setNo_utilisateur(Utilisateur no_utilisateur) {
+        this.no_utilisateur = no_utilisateur;
     }
 
     @Override
     public String toString() {
         return "ArticleVendu{" +
-                "noArticle='" + noArticle + '\'' +
-                ", nomArticle='" + nomArticle + '\'' +
+                "noArticle='" + no_article + '\'' +
+                ", nomArticle='" + nom_article + '\'' +
                 ", description='" + description + '\'' +
-                ", dateDebutEncheres=" + dateDebutEncheres +
-                ", dateFinEncheres=" + dateFinEncheres +
-                ", miseAPrix=" + miseAPrix +
-                ", prixVente=" + prixVente +
-                ", etatVente='" + etatVente + '\'' +
+                ", dateDebutEncheres=" + date_debut_encheres +
+                ", dateFinEncheres=" + date_fin_encheres +
+                ", miseAPrix=" + prix_initial +
+                ", prixVente=" + prix_vente +
+                ", etatVente='" + etat_vente + '\'' +
                 '}';
     }
 }

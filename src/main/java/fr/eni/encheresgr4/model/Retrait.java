@@ -6,13 +6,13 @@ public class Retrait {
     private String code_postal;
     private String ville;
 
-    private ArticleVendu articleVendu;
+    private int no_article;
 
-    public Retrait(String rue, String code_postal, String ville, ArticleVendu articleVendu) {
+    public Retrait(String rue, String code_postal, String ville, int no_article) {
         this.rue = rue;
         this.code_postal = code_postal;
         this.ville = ville;
-        this.articleVendu = articleVendu;
+        this.no_article = no_article;
     }
 
     public Retrait() {
