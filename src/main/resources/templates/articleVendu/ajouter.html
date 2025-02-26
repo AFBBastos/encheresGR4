@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'enchère</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+
+</head>
+<body class="ui container ">
+<h1 class="ui center aligned header">Nouvelle vente</h1>
+<div class="ui two column stackable grid segment" style="padding: 1rem !important">
+    <div class="item six wide column">
+        <div class="ui card">
+            <img id="preview-image" class="ui medium rounded bordered image center aligned" width="150" height="150" src="https://via.placeholder.com/150">
+        </div>
+    </div>
+    <div class="ten wide column" >
+        <form class="ui form" th:object="${article}">
+            <div class="row">
+                <label>Article :</label>
+                <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
+            </div>
+            <div class="row">
+                <label for="description">Description :</label>
+                <textarea id="description" th:field="*{description}" rows="2" cols="20" placeholder="Description détailée" required></textarea>
+            </div>
+            <div class="row">
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" th:field="*{no_categorie}" required>
+                    <option value="">Sélectionnez une catégorie</option>
+                    <option value="electronique">Électronique</option>
+                    <option value="vetements">Vêtements</option>
+                    <option value="maison">Maison</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>Photo de l'article :</label>
+                <div class="ui file input">
+                    <input type="file" id="image-upload" accept="image/*" required>
+                </div>
+            </div>
+            <div class="row">
+                <label for="prix">Mise à prix :</label>
+                <input type="number" id="prix" th:field="*{prix_initial}" min="0" step="1" placeholder="Prix initial" required>
+            </div>
+            <div class="row">
+                <label for="debut">Début d'enchère :</label>
+                <input type="datetime-local" id="debut" th:field="*{date_debut_encheres}" required>
+            </div>
+            <div class="row">
+                <label for="fin">Fin d'enchère :</label>
+                <input type="datetime-local" id="fin" th:field="*{date_fin_encheres}" required>
+            </div>
+            <div class="ui segment">
+                <h4 class="ui left header">Adresse</h4>
+                <div>
+                    <label for="rue">Rue :</label>
+                    <input type="text" id="rue" th:field="*{lieuRetrait.rue}" placeholder="Rue">
+                </div>
+                <div>
+                    <label for="code_postal">Code Postal :</label>
+                    <input type="text" id="code_postal" th:field="*{lieuRetrait.code_postal}" placeholder="Code Postal" required>
+                </div>
+                <div>
+                    <label for="ville">Ville :</label>
+                    <input type="text" id="ville" th:field="*{lieuRetrait.ville}" placeholder="Ville" required>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit"  class="ui inverted primary button">Enregistrer</button>
+                <button type="submit"  class="ui inverted green button">Soumettre</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("image-upload").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("preview-image").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</html>

@@ -5,15 +5,12 @@ import fr.eni.encheresgr4.service.ArticleVenduService;
 import fr.eni.encheresgr4.service.CategorieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -26,6 +23,22 @@ public class ArticleVenduController {
     public ArticleVenduController(ArticleVenduService articlesVendusService, CategorieService categorieService) {
         this.articlesVendusService = articlesVendusService;
         this.categorieService = categorieService;
+    }
+
+    @GetMapping("/ajouter")
+    public String ajouterGet(Model model) {
+        Utilisateur currentUtilisateur = new Utilisateur(1,"Dede","André", "Bastos","afb.bastos@gmail.com", "0123456789", "rue des machins", "44000", "Nantes", "azerty", 500, true);
+        ArticleVendu article = new ArticleVendu();
+        Retrait retrait = new Retrait(currentUtilisateur.getRue(), currentUtilisateur.getCode_postal(), currentUtilisateur.getVille(), article.getNo_article());
+        article.setLieuRetrait(retrait);
+        model.addAttribute("article",article);
+        return "articleVendu/ajouter";
+  }
+
+
+    @PostMapping("/ajouter")
+    public String ajouterPost(Model model, ArticleVendu article) {
+        return "articleVendu/liste";
     }
 
     @GetMapping()
