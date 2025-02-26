@@ -3,20 +3,14 @@ package fr.eni.encheresgr4.controller;
 import fr.eni.encheresgr4.model.*;
 import fr.eni.encheresgr4.service.ArticleVenduService;
 import fr.eni.encheresgr4.service.CategorieService;
-import fr.eni.encheresgr4.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 @Controller
@@ -35,7 +29,7 @@ public class ArticleVenduController {
     public String ajouterGet(Model model) {
         Utilisateur currentUtilisateur = new Utilisateur(1,"Dede","André", "Bastos","afb.bastos@gmail.com", "0123456789", "rue des machins", "44000", "Nantes", "azerty", 500, true);
         ArticleVendu article = new ArticleVendu();
-        Retrait retrait = new Retrait(currentUtilisateur.getRue(), currentUtilisateur.getCodePostal(), currentUtilisateur.getVille(), article);
+        Retrait retrait = new Retrait(currentUtilisateur.getRue(), currentUtilisateur.getCode_postal(), currentUtilisateur.getVille(), article.getNo_article());
         article.setLieuRetrait(retrait);
         model.addAttribute("article",article);
         return "articleVendu/ajouter";

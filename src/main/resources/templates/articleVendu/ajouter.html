@@ -23,7 +23,7 @@
         <form class="ui form" th:object="${article}">
             <div class="row">
                 <label>Article :</label>
-                <input type="text" id="article" th:field="*{nomArticle}" placeholder="Nom de l'article" required>
+                <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
             </div>
             <div class="row">
                 <label for="description">Description :</label>
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <label for="categorie">Catégorie :</label>
-                <select id="categorie" th:field="*{categorie}" required>
+                <select id="categorie" th:field="*{no_categorie}" required>
                     <option value="">Sélectionnez une catégorie</option>
                     <option value="electronique">Électronique</option>
                     <option value="vetements">Vêtements</option>
@@ -50,25 +50,25 @@
             </div>
             <div class="row">
                 <label for="debut">Début d'enchère :</label>
-                <input type="datetime-local" id="debut" name="debut" required>
+                <input type="datetime-local" id="debut" th:field="*{date_debut_encheres}" required>
             </div>
             <div class="row">
                 <label for="fin">Fin d'enchère :</label>
-                <input type="datetime-local" id="fin" name="fin" required>
+                <input type="datetime-local" id="fin" th:field="*{date_fin_encheres}" required>
             </div>
             <div class="ui segment">
                 <h4 class="ui left header">Adresse</h4>
                 <div>
                     <label for="rue">Rue :</label>
-                    <input type="text" id="rue" name="rue" placeholder="Rue">
+                    <input type="text" id="rue" th:field="*{lieuRetrait.rue}" placeholder="Rue">
                 </div>
                 <div>
                     <label for="code_postal">Code Postal :</label>
-                    <input type="text" id="code_postal" name="code_postal" placeholder="Code Postal" required>
+                    <input type="text" id="code_postal" th:field="*{lieuRetrait.code_postal}" placeholder="Code Postal" required>
                 </div>
                 <div>
                     <label for="ville">Ville :</label>
-                    <input type="text" id="ville" name="ville" placeholder="Ville" required>
+                    <input type="text" id="ville" th:field="*{lieuRetrait.ville}" placeholder="Ville" required>
                 </div>
             </div>
             <div class="row">
