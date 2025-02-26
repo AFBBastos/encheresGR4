@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/ventes")
+@RequestMapping("/")
 public class ArticleVenduController {
 
     private final CategorieService categorieService;
@@ -74,7 +74,7 @@ public class ArticleVenduController {
         return "articleVendu/liste";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("ventes/{id}")
     public String detail(@PathVariable("id") final int id, Model model) throws ParseException {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
