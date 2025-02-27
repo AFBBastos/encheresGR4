@@ -9,6 +9,7 @@
 </head>
 <body class="ui container">
 
+    <div th:replace="/accueil/headers :: commonHeader"></div>
     <div th:if="${articleVendu == null}">
         <h1 class="ui center aligned header">404 - Article non trouvé</h1>
     </div>
