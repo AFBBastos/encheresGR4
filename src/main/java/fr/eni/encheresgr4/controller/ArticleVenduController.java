@@ -32,6 +32,7 @@ public class ArticleVenduController {
         Retrait retrait = new Retrait(currentUtilisateur.getRue(), currentUtilisateur.getCode_postal(), currentUtilisateur.getVille(), article.getNo_article());
         article.setLieuRetrait(retrait);
         model.addAttribute("article",article);
+        model.addAttribute("currentUser", currentUtilisateur);
         return "articleVendu/ajouter";
   }
 

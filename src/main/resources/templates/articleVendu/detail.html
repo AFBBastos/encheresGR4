@@ -9,7 +9,7 @@
 </head>
 <body class="ui container">
 
-    <div th:replace="/accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
     <h1 class="ui center aligned header">Détail vente</h1>
 
     <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">

@@ -9,7 +9,7 @@
 </head>
 <body class="ui container">
 
-  <div th:replace="accueil/headers :: commonHeader"></div>
+  <div th:insert="~{accueil/headers :: body}"></div>
 
   <div style="margin-top:5%;text-align: center;">
     <h3>Pseudo : [[${currentUser.pseudo}]]</h3>
