@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/ventes")
 public class ArticleVenduController {
 
     private final CategorieService categorieService;
@@ -47,7 +47,7 @@ public class ArticleVenduController {
         return "redirect:/ventes";
     }
 
-    @GetMapping({"/", "/ventes"})
+    @GetMapping
     public String listeArticleVendu(Model model) {
         model.addAttribute("articlesVendus", articlesVendusService.findAllArticleVendu());
         model.addAttribute("categories", categorieService.findAllCategorie());
