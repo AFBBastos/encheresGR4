@@ -9,14 +9,12 @@
 </head>
 <body class="ui container">
 
-    <div th:replace="/accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
     <div th:if="${articleVendu == null}">
         <h1 class="ui center aligned header">404 - Article non trouvé</h1>
     </div>
-
     <div th:if="${articleVendu != null}">
         <h1 class="ui center aligned header">Détail vente</h1>
-
         <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
             <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
                 <h1 class="ui center aligned header">Vous avez remporté la vente</h1>

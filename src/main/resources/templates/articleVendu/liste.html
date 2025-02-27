@@ -11,7 +11,7 @@
 </head>
 
 <body class="ui container">
-    <div th:replace="accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
     <div class="ui center aligned icon header">
         <form th:action="@{'/rechercher'}" method="post">
             <div class="ui input">

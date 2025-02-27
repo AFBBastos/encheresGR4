@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
 </head>
 <body class="ui container ">
-<div th:replace="accueil/headers :: commonHeader"></div>
+<div th:insert="~{accueil/headers :: body}"></div>
 <h1 class="ui center aligned header">Nouvelle vente</h1>
 <div class="ui two column stackable grid segment" style="padding: 1rem !important">
     <div class="item six wide column">
@@ -21,7 +21,7 @@
     </div>
     <div class="ten wide column" >
         <form class="ui form" th:object="${article}" method="post" th:action="@{/ventes/ajouter}">
-            <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUtilisateur.no_utilisateur}">
+            <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUser.no_utilisateur}">
             <div class="row">
                 <label>Article :</label>
                 <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
