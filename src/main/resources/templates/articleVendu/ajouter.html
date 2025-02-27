@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="ten wide column" >
-        <form class="ui form" th:object="${article}" method="post">
+        <form class="ui form" th:object="${article}" method="post" th:action="@{/ventes/ajouter}">
             <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUtilisateur.no_utilisateur}">
             <div class="row">
                 <label>Article :</label>

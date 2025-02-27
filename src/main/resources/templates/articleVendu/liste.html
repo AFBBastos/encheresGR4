@@ -13,7 +13,7 @@
 <body class="ui container">
     <div th:replace="accueil/headers :: commonHeader"></div>
     <div class="ui center aligned icon header">
-        <form th:action="@{'/rechercher'}" method="post">
+        <form th:action="@{'/ventes/rechercher'}" method="post">
             <div class="ui input">
                 <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
             </div>
