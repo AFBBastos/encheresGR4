@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+</head>
+<body class="ui container ">
+<div class="ui one column stackable grid segment" style="padding: 1rem !important">
+    <div class="four wide column"></div>
+    <div class="center aligned">
+        <form class="ui five column form left aligned" method="post">
+            <div class="row">
+                <label for="username">Identifiant :</label>
+                <input type="text" id="username" name="username" placeholder="Pseudo" required>
+            </div>
+            <div class="row">
+                <label for="password">Mot de passe :</label>
+                <input id="password" name="password" rows="2" cols="20"
+                       placeholder="Description détailée" required/>
+            </div>
+            <div class="row ui two column stackable grid">
+                <div class="ui one column stackable">
+                    <button type="submit" class="ui inverted primary button">Se connecter</button>
+                </div>
+                <div class="ui one column stackable">
+                    <div class="row">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="rappel">
+                            <label>Se souvenir de moi</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="#">Mot de passe oublié</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<!--
+RECTIFIER:
+Checkbox "Se souvenir de moi",
+Lien pour "Mot de passe oublié",
+
+-->
