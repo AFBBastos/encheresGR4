@@ -1,17 +1,17 @@
 package fr.eni.encheresgr4.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ArticleVendu {
 
     private int no_article;
     private String nom_article;
     private String description;
-    private Date date_debut_encheres;
-    private Date date_fin_encheres;
+    private LocalDateTime date_debut_encheres;
+    private LocalDateTime date_fin_encheres;
     private int prix_initial;
     private int prix_vente;
-    private String etat_vente;
+    private String etat_vente = "En cours";
 
     private Categorie no_categorie;
     private Retrait lieuRetrait;
@@ -20,8 +20,8 @@ public class ArticleVendu {
     public ArticleVendu(int no_article,
                         String nom_article,
                         String description,
-                        Date date_debut_encheres,
-                        Date date_fin_encheres,
+                        LocalDateTime date_debut_encheres,
+                        LocalDateTime date_fin_encheres,
                         int prix_initial,
                         int prix_vente,
                         String etat_vente,
@@ -42,8 +42,8 @@ public class ArticleVendu {
     public ArticleVendu(int no_article,
                         String nom_article,
                         String description,
-                        Date date_debut_encheres,
-                        Date date_fin_encheres,
+                        LocalDateTime date_debut_encheres,
+                        LocalDateTime date_fin_encheres,
                         int prix_initial,
                         int prix_vente,
                         String etat_vente,
@@ -88,19 +88,19 @@ public class ArticleVendu {
         this.description = description;
     }
 
-    public Date getDate_debut_encheres() {
+    public LocalDateTime getDate_debut_encheres() {
         return date_debut_encheres;
     }
 
-    public void setDate_debut_encheres(Date date_debut_encheres) {
+    public void setDate_debut_encheres(LocalDateTime date_debut_encheres) {
         this.date_debut_encheres = date_debut_encheres;
     }
 
-    public Date getDate_fin_encheres() {
+    public LocalDateTime getDate_fin_encheres() {
         return date_fin_encheres;
     }
 
-    public void setDate_fin_encheres(Date date_fin_encheres) {
+    public void setDate_fin_encheres(LocalDateTime date_fin_encheres) {
         this.date_fin_encheres = date_fin_encheres;
     }
 

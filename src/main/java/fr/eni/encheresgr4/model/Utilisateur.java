@@ -1,6 +1,13 @@
 package fr.eni.encheresgr4.model;
 
-public class Utilisateur{
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.Collection;
+import java.util.List;
+
+public class Utilisateur implements UserDetails {
     private int no_utilisateur;
     private String pseudo;
     private String nom;
@@ -155,5 +162,20 @@ public class Utilisateur{
                 ", credit=" + credit +
                 ", administrateur='" + administrateur + '\'' +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return this.mot_de_passe;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.pseudo;
     }
 }
