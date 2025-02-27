@@ -29,14 +29,16 @@ public class ArticleVenduController {
 
     @GetMapping("/ajouter")
     public String ajouterGet(Model model) {
-        Utilisateur currentUtilisateur = new Utilisateur(1,"Dede","André", "Bastos","afb.bastos@gmail.com", "0123456789", "rue des machins", "44000", "Nantes", "azerty", 500, true);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+
         ArticleVendu article = new ArticleVendu();
-        Retrait retrait = new Retrait(currentUtilisateur.getRue(), currentUtilisateur.getCode_postal(), currentUtilisateur.getVille(), article.getNo_article());
+        Retrait retrait = new Retrait(currentUser.getRue(), currentUser.getCode_postal(), currentUser.getVille(), article.getNo_article());
         article.setLieuRetrait(retrait);
         List<Categorie> categories = categorieService.findAllCategorie();
         model.addAttribute("article",article);
         model.addAttribute("categories",categories);
-        model.addAttribute("currentUtilisateur",currentUtilisateur);
+        model.addAttribute("currentUtilisateur",currentUser);
         return "articleVendu/ajouter";
   }
 
@@ -51,8 +53,12 @@ public class ArticleVenduController {
 
     @GetMapping
     public String listeArticleVendu(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+
         model.addAttribute("articlesVendus", articlesVendusService.findAllArticleVendu());
         model.addAttribute("categories", categorieService.findAllCategorie());
+        model.addAttribute("currentUser", currentUser);
         return "articleVendu/liste";
     }
 
