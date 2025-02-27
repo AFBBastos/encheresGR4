@@ -20,7 +20,7 @@
     <p><strong>Rue</strong> : [[${currentUser.rue}]]</p>
     <p><strong>Code postal</strong> : [[${currentUser.code_postal}]]</p>
     <p><strong>Ville</strong> : [[${currentUser.Ville}]]</p>
-    <a class="ui button" th:href="@{/modificationProfil/{id}(id=${currentUser.no_utilisateur})}">Modifier</a>
+    <a class="ui primary button" th:href="@{/utilisateur/{id}/modificationProfil(id=${currentUser.no_utilisateur})}">Modifier</a>
   </div>
 
 </body>
