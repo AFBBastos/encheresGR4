@@ -14,7 +14,9 @@
                 <a href="/">Enchères</a>
                 - <a href="/ajouter">Vendre un article</a>
                 - <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
-                - <a href="/connexion">Déconnexion</a>
+                - <form th:action="@{/logout}" method="post">
+                    <input th:type="submit" value="Déconnexion">
+            </form>
             </div>
         </nav>
     </header>

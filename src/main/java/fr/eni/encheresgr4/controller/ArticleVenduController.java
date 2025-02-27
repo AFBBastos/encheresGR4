@@ -41,7 +41,7 @@ public class ArticleVenduController {
         return "articleVendu/liste";
     }
 
-    @GetMapping()
+    @GetMapping({"/", "/ventes"})
     public String listeArticleVendu(Model model) {
 
 
