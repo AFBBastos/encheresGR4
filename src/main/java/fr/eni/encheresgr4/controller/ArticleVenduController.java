@@ -3,6 +3,8 @@ package fr.eni.encheresgr4.controller;
 import fr.eni.encheresgr4.model.*;
 import fr.eni.encheresgr4.service.ArticleVenduService;
 import fr.eni.encheresgr4.service.CategorieService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,16 +68,18 @@ public class ArticleVenduController {
 
         ArticleVendu articleVendu = articlesVendusService.findOneById(id);
         Enchere enchere = new Enchere();
+        Enchere dernierEnchere = null;
 
-        Utilisateur currentUser = new Utilisateur(1, "Noix", "HRV", "Noä", "noa.hervieu2024@campus-eni.fr", "0123456789", "6 rue de la chose", "44100", "Nantes", "Mot2p@ssTè6qrizé", 200, true);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Utilisateur currentUtilisateur = (Utilisateur) authentication.getPrincipal();
 
         // TODO A MODIF SUR S003 et S004
-        Enchere dernierEnchere = null;
-        dernierEnchere = new Enchere(new Date(), 100, currentUser, articleVendu);
+//        Enchere dernierEnchere = null;
+//        dernierEnchere = new Enchere(new Date(), 100, currentUser, articleVendu);
 
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("enchere", enchere);
-        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("currentUser", currentUtilisateur);
         model.addAttribute("dernierEnchere", dernierEnchere); // Peut être null
 
         return "articleVendu/detail";

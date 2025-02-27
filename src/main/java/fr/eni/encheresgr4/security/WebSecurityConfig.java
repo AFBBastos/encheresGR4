@@ -25,7 +25,6 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/ventes/ajouter").fullyAuthenticated()
                         .anyRequest().authenticated()
                 )
 

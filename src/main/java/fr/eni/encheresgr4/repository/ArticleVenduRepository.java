@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -27,11 +29,14 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     @Autowired
     private CategorieRepository categorieRepository;
 
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
     @Override
     public ArticleVendu findOneById(int id) {
         try {
-            String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente from articles_vendus WHERE no_article = ?";
-            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository), id);
+            String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat_vente from articles_vendus WHERE no_article = ?";
+            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository, utilisateurRepository), id);
         }catch (Exception e) {
             return null;
         }
@@ -39,8 +44,8 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
 
     @Override
     public List<ArticleVendu> findAll() {
-        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente from articles_vendus";
-        return jdbcTemplate.query(sql, new rowMapper(categorieRepository));
+        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat_vente from articles_vendus";
+        return jdbcTemplate.query(sql, new rowMapper(categorieRepository, utilisateurRepository));
     }
 
     @Override
@@ -83,25 +88,29 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     static class rowMapper implements RowMapper<ArticleVendu> {
 
         private CategorieRepository categorieRepository;
+        private UtilisateurRepository utilisateurRepository;
 
-        public rowMapper(CategorieRepository categorieRepository) {
+        public rowMapper(CategorieRepository categorieRepository, UtilisateurRepository utilisateurRepository) {
             this.categorieRepository = categorieRepository;
+            this.utilisateurRepository = utilisateurRepository;
         }
 
         @Override
         public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
             ArticleVendu articleVendu = new ArticleVendu();
             articleVendu.setNo_article(rs.getInt("no_article"));
             articleVendu.setNom_article(rs.getString("nom_article"));
             articleVendu.setDescription(rs.getString("description"));
-//            articleVendu.setDate_debut_encheres(rs.getTimestamp("date_debut_encheres"));
-//            articleVendu.setDate_fin_encheres(rs.getTimestamp("date_fin_encheres"));
+            articleVendu.setDate_debut_encheres(LocalDateTime.parse(rs.getString("date_debut_encheres"),formatter));
+            articleVendu.setDate_fin_encheres(LocalDateTime.parse(rs.getString("date_fin_encheres"),formatter));
             articleVendu.setPrix_initial(rs.getInt("prix_initial"));
             articleVendu.setPrix_vente(rs.getInt("prix_vente"));
             articleVendu.setEtat_vente(rs.getString("etat_vente"));
             articleVendu.setNo_categorie(categorieRepository.findOneById(rs.getInt("no_categorie")));
-            // TODO A CHANGER AVEC LE REPO USER
-            articleVendu.setNo_utilisateur(new Utilisateur(1, "Noix", "HRV", "Noä", "noa.hervieu2024@campus-eni.fr", "0123456789", "6 rue de la chose", "44100", "Nantes", "Mot2p@ssTè6qrizé", 200, true));
+            System.out.println(utilisateurRepository.findOneById(rs.getInt("no_utilisateur")));
+            articleVendu.setNo_utilisateur(utilisateurRepository.findOneById(rs.getInt("no_utilisateur")));
             return articleVendu;
         }
     }

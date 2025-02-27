@@ -40,7 +40,7 @@
                     </div>
                     <p class="ui text">Meilleur offre :
                         <span th:if="${dernierEnchere} == null">
-                        <span th:text="${articleVendu.prix_vente}"></span>
+                        <span th:text="${articleVendu.prix_initial}"></span>
                     pts
                     </span>
                         <span th:if="${dernierEnchere} != null">
@@ -49,8 +49,8 @@
                     </p>
                     <p class="ui text">Mise à prix : <span th:text="${articleVendu.prix_initial}"></span> pts</p>
                     <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
-                        <p class="ui text">Début de l'enchère : <span th:text="${#dates.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
-                        <p class="ui text">Fin de l'enchère : <span th:text="${#dates.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text">Début de l'enchère : <span th:text="${#temporals.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text">Fin de l'enchère : <span th:text="${#temporals.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
                         <p class="ui text"></p>
                     </div>
                     <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
