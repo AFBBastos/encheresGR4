@@ -20,7 +20,8 @@
         </div>
     </div>
     <div class="ten wide column" >
-        <form class="ui form" th:object="${article}">
+        <form class="ui form" th:object="${article}" method="post">
+            <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUtilisateur.no_utilisateur}">
             <div class="row">
                 <label>Article :</label>
                 <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
@@ -32,10 +33,11 @@
             <div class="row">
                 <label for="categorie">Catégorie :</label>
                 <select id="categorie" th:field="*{no_categorie}" required>
-                    <option value="">Sélectionnez une catégorie</option>
-                    <option value="electronique">Électronique</option>
-                    <option value="vetements">Vêtements</option>
-                    <option value="maison">Maison</option>
+                    <option value="0">Pas de catégorie sélectionnée</option>
+                    <option th:each="categorie : ${categories}"
+                            th:text="${categorie.libelle}"
+                            th:value="${categorie.no_categorie}">
+                    </option>
                 </select>
             </div>
             <div class="row">
@@ -73,7 +75,7 @@
             </div>
             <div class="row">
                 <button type="submit"  class="ui inverted primary button">Enregistrer</button>
-                <button type="submit"  class="ui inverted green button">Soumettre</button>
+                <button type="reset"  class="ui inverted orange button">Annuler</button>
             </div>
         </form>
     </div>

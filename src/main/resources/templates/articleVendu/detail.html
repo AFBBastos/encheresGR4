@@ -9,56 +9,62 @@
 </head>
 <body class="ui container">
 
-    <h1 class="ui center aligned header">Détail vente</h1>
-
-    <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
-        <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
-            <h1 class="ui center aligned header">Vous avez remporté la vente</h1>
-        </div>
-        <div th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur}">
-            <h1 class="ui center aligned header" th:text="${articleVendu.no_utilisateur.pseudo} + ' a remporté la vente'"></h1>
-        </div>
+    <div th:if="${articleVendu == null}">
+        <h1 class="ui center aligned header">404 - Article non trouvé</h1>
     </div>
 
-    <div class="ui two column stackable grid segment">
-        <div class="four wide column">
-            <img class="ui medium image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PS2-Versions.png/800px-PS2-Versions.png" alt="Image de la ps2">
+    <div th:if="${articleVendu != null}">
+        <h1 class="ui center aligned header">Détail vente</h1>
+
+        <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
+            <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
+                <h1 class="ui center aligned header">Vous avez remporté la vente</h1>
+            </div>
+            <div th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur}">
+                <h1 class="ui center aligned header" th:text="${articleVendu.no_utilisateur.pseudo} + ' a remporté la vente'"></h1>
+            </div>
         </div>
-        <div class="twelve wide column">
-            <div class="segment">
-                <h1 class="ui header" th:text="${articleVendu.nom_article}"></h1>
-                <p class="ui text">Description : <span th:text="${articleVendu.description}"></span></p>
-                <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
-                    <p class="ui text">Categorie : <span th:text="${articleVendu.no_categorie.libelle}"></span></p>
-                    <p class="ui text"></p>
-                </div>
-                <p class="ui text">Meilleur offre :
-                    <span th:if="${dernierEnchere} == null">
+
+        <div class="ui two column stackable grid segment">
+            <div class="four wide column">
+                <img class="ui medium image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PS2-Versions.png/800px-PS2-Versions.png" alt="Image de la ps2">
+            </div>
+            <div class="twelve wide column">
+                <div class="segment">
+                    <h1 class="ui header" th:text="${articleVendu.nom_article}"></h1>
+                    <p class="ui text">Description : <span th:text="${articleVendu.description}"></span></p>
+                    <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
+                        <p class="ui text">Categorie : <span th:text="${articleVendu.no_categorie.libelle}"></span></p>
+                        <p class="ui text"></p>
+                    </div>
+                    <p class="ui text">Meilleur offre :
+                        <span th:if="${dernierEnchere} == null">
                         <span th:text="${articleVendu.prix_vente}"></span>
                     pts
                     </span>
-                    <span th:if="${dernierEnchere} != null">
+                        <span th:if="${dernierEnchere} != null">
                         <span th:text="${dernierEnchere.montant_enchere} + ' pts par ' + ${dernierEnchere.no_utilisateur.pseudo}"></span>
                     </span>
-                </p>
-                <p class="ui text">Mise à prix : <span th:text="${articleVendu.prix_initial}"></span> pts</p>
-                <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
-                    <p class="ui text">Début de l'enchère : <span th:text="${#dates.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
-                    <p class="ui text">Fin de l'enchère : <span th:text="${#dates.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
-                    <p class="ui text"></p>
-                </div>
-                <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
-                <p class="ui text">Vendeur : <span th:text="${articleVendu.no_utilisateur.pseudo}"></span></p>
-                <form class="ui form" th:object="${enchere}" method="post" th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">
-                    <div class="field">
-                        <div class="three wide field">
-                            <label for="proposition">Ma proposition : </label>
-                            <input id="proposition" type="number" th:field="*{montant_enchere}" th:value="${articleVendu.prix_vente}">
-                        </div>
-                        <button class="ui inverted green button">Enchérir</button>
+                    </p>
+                    <p class="ui text">Mise à prix : <span th:text="${articleVendu.prix_initial}"></span> pts</p>
+                    <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
+                        <p class="ui text">Début de l'enchère : <span th:text="${#dates.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text">Fin de l'enchère : <span th:text="${#dates.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text"></p>
                     </div>
-                </form>
-                <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">Modifier</a>
+                    <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
+                    <p class="ui text">Vendeur : <span th:text="${articleVendu.no_utilisateur.pseudo}"></span></p>
+                    <form class="ui form" th:object="${enchere}" method="post" th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">
+                        <div class="field">
+                            <div class="three wide field">
+                                <label for="proposition">Ma proposition : </label>
+                                <input id="proposition" type="number" th:field="*{montant_enchere}" th:value="${articleVendu.prix_vente}">
+                            </div>
+                            <button class="ui inverted green button">Enchérir</button>
+                        </div>
+                    </form>
+                    <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">Modifier</a>
+                </div>
             </div>
         </div>
     </div>
