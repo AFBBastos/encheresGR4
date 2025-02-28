@@ -17,6 +17,6 @@ public class UtilisateurService {
         utilisateurs.add(utilisateur);
     }
 
-    public List<Utilisateur> findAllUtilisateurs() { return utilisateurs; }
+    public List<Utilisateur> findAllUtilisateur() { return utilisateurs; }
 
 }

@@ -1,5 +1,8 @@
 package fr.eni.encheresgr4.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,18 +11,41 @@ import java.util.Collection;
 import java.util.List;
 
 public class Utilisateur implements UserDetails {
+
     private int no_utilisateur;
+
+    @NotBlank(message = "Veuillez saisir un pseudo")
     private String pseudo;
+
+    @NotBlank(message = "Veuillez saisir un nom")
     private String nom;
+
+    @NotBlank(message = "Veuillez saisir un prénom")
     private String prenom;
+
+    @NotBlank(message = "Veuillez saisir une adresse mail")
+    @Email(message = "Veuillez saisir une adresse valide")
+    @Size(max = 100, message = "L'adresse mail ne doit pas dépasser 100 caractères")
     private String email;
+
+    @Size(max = 10, message = "Le numéro de téléphone dois comporter exactement 10 chiffres")
     private String telephone;
+
+    @NotBlank(message = "Veuillez saisir une rue")
     private String rue;
+
+    @NotBlank(message = "Veuillez saisir un code postal")
+    @Size(min = 5, max = 5, message = "Le code postal dois comporter exactement 5 chiffres")
     private String code_postal;
+
+    @NotBlank(message = "Veuillez saisir une ville")
     private String ville;
+
+    @NotBlank(message = "Veuillez saisir un mot de passe")
     private String mot_de_passe;
-    private int credit;
-    private boolean administrateur;
+
+    private int credit = 0;
+    private boolean administrateur = false;
 
     public Utilisateur(int noUtilisateur,
                        String pseudo,

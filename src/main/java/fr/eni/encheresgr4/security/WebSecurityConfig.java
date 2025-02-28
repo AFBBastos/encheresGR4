@@ -24,11 +24,10 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/inscription").permitAll()
                         .anyRequest().authenticated()
                 )
-
                 .formLogin((form)-> form.loginPage("/login").permitAll())
-
                 .logout((logout) -> logout.logoutUrl("/logout").permitAll())
         ;
         return http.build();
@@ -37,9 +36,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-
         return authenticationManagerBuilder.build();
     }
 
