@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvel Utilisateur</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+</head>
+<body class="ui container">
+<h1 class="ui center aligned header">Nouvel utilisateur</h1>
+<div class="ui three column stackable grid segment" style="padding: 1rem !important">
+    <div class="five wide column"></div>
+        <form class="ui form left aligned one column" method="post" th:object="${utilisateur}">
+            <div class="row">
+                <label for="pseudo">Pseudo :</label>
+                <input type="text" id="pseudo" th:field="*{pseudo}" placeholder="Pseudo" required>
+            </div>
+            <div class="row">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" th:field="*{nom}" placeholder="Nom" required>
+            </div>
+            <div class="row">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" th:field="*{prenom}" placeholder="Prénom" required>
+            </div>
+            <div class="row">
+                <label for="email">E-mail :</label>
+                <input type="email" id="email" th:field="*{email}" placeholder="Email" required>
+            </div>
+            <div class="row">
+                <label for="telephone">Téléphone :</label>
+                <input type="text" id="telephone" th:field="*{telephone}" placeholder="Téléphone" required>
+            </div>
+            <div class="row">
+                <label for="rue">Rue :</label>
+                <input type="text" id="rue" th:field="*{rue}" placeholder="Rue" required>
+            </div>
+            <div class="row">
+                <label for="code_postal">Code Postal :</label>
+                <input type="text" id="code_postal" th:field="*{code_postal}" placeholder="Code Postal" required>
+            </div>
+            <div class="row">
+                <label for="ville">Ville :</label>
+                <input type="text" id="ville" th:field="*{ville}" placeholder="Ville" required>
+            </div>
+            <div class="row">
+                <label for="mot_de_passe">Mot de passe :</label>
+                <input type="text" id="mot_de_passe" th:field="*{mot_de_passe}" placeholder="Mot de passe" required>
+            </div>
+            <div class="row" style="padding-top: 1rem" >
+                <a href="/login" class="ui inverted orange button">Revenir</a>
+                <button type="submit" class="ui inverted green button">Soumettre</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
