@@ -2,11 +2,10 @@ package fr.eni.encheresgr4.model;
 
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Enchere {
-
-    private Date date_enchere;
+    private LocalDateTime date_enchere;
 
     @NotBlank(message = "Veuillez saisir un montant")
     private int montant_enchere;
@@ -17,18 +16,18 @@ public class Enchere {
     public Enchere() {
     }
 
-    public Enchere(Date date_enchere, int montant_enchere, Utilisateur no_utilisateur, ArticleVendu no_article) {
+    public Enchere(LocalDateTime date_enchere, int montant_enchere, Utilisateur no_utilisateur, ArticleVendu no_article) {
         this.date_enchere = date_enchere;
         this.montant_enchere = montant_enchere;
         this.no_utilisateur = no_utilisateur;
         this.no_article = no_article;
     }
 
-    public Date getDate_enchere() {
+    public LocalDateTime getDate_enchere() {
         return date_enchere;
     }
 
-    public void setDate_enchere(Date date_enchere) {
+    public void setDate_enchere(LocalDateTime date_enchere) {
         this.date_enchere = date_enchere;
     }
 
