@@ -1,22 +1,25 @@
 package fr.eni.encheresgr4.service;
 
 import fr.eni.encheresgr4.model.Utilisateur;
+import fr.eni.encheresgr4.repository.UtilisateurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UtilisateurService {
 
-    private List<Utilisateur> utilisateurs;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
-    public UtilisateurService() { utilisateurs = new ArrayList<>(); }
-
-    public void ajouterUtilisateur(Utilisateur utilisateur) {
-        utilisateurs.add(utilisateur);
+    public void save(Utilisateur utilisateur) {
+        utilisateurRepository.save(utilisateur);
     }
 
-    public List<Utilisateur> findAllUtilisateur() { return utilisateurs; }
+    public void saveWithPassword(Utilisateur utilisateur) {
+        utilisateurRepository.saveWithPassword(utilisateur);
+    }
+
+    public List<Utilisateur> findAllUtilisateur() { return utilisateurRepository.findAll(); }
 
 }

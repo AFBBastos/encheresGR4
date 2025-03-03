@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +26,8 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/inscription").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/inscription").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/inscription").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form)-> form.loginPage("/login").permitAll())

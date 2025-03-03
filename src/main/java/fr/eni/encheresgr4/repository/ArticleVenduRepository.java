@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     }
 
     @Override
-    public void save(ArticleVendu articleVendu) {
+    public int save(ArticleVendu articleVendu) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("no_article", articleVendu.getNo_article())
                 .addValue("nom_article", articleVendu.getNom_article())
@@ -69,7 +70,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"no_article"});
             // recup l'id auto générer
-//            System.out.println(keyHolder.getKey());
+            return (keyHolder.getKey()) == null ? 0 : keyHolder.getKey().intValue();
         }else{
             // modif
             String sql =    "UPDATE articles_vendus " +
@@ -77,6 +78,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
                     "WHERE no_article = :no_article;";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"no_article"});
+            return (keyHolder.getKey()) == null ? 0 : keyHolder.getKey().intValue();
         }
     }
 
@@ -97,14 +99,12 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
 
         @Override
         public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
             ArticleVendu articleVendu = new ArticleVendu();
             articleVendu.setNo_article(rs.getInt("no_article"));
             articleVendu.setNom_article(rs.getString("nom_article"));
             articleVendu.setDescription(rs.getString("description"));
-            articleVendu.setDate_debut_encheres(LocalDateTime.parse(rs.getString("date_debut_encheres"),formatter));
-            articleVendu.setDate_fin_encheres(LocalDateTime.parse(rs.getString("date_fin_encheres"),formatter));
+            articleVendu.setDate_debut_encheres(OffsetDateTime.parse(rs.getString("date_debut_encheres").replace( " " , "T")).toLocalDateTime());
+            articleVendu.setDate_fin_encheres(OffsetDateTime.parse(rs.getString("date_fin_encheres").replace( " " , "T")).toLocalDateTime());
             articleVendu.setPrix_initial(rs.getInt("prix_initial"));
             articleVendu.setPrix_vente(rs.getInt("prix_vente"));
             articleVendu.setEtat_vente(rs.getString("etat_vente"));

@@ -76,6 +76,9 @@ public class Utilisateur implements UserDetails {
     public Utilisateur() {
     }
 
+    public Utilisateur(int i, String pseudo, String lastName, String name, String email, String telephone, String rue, String codePostal, String ville, String motDePasse) {
+    }
+
     public int getNo_utilisateur() {
         return no_utilisateur;
     }

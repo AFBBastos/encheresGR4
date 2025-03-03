@@ -11,7 +11,7 @@
 <h1 class="ui center aligned header">Nouvel utilisateur</h1>
 <div class="ui three column stackable grid segment" style="padding: 1rem !important">
     <div class="five wide column"></div>
-        <form class="ui form left aligned one column" method="post" th:object="${utilisateur}">
+        <form class="ui form left aligned one column" method="post" th:object="${utilisateur}" th:action="@{/inscription}">
             <div class="row">
                 <label for="pseudo">Pseudo :</label>
                 <input type="text" id="pseudo" th:field="*{pseudo}" placeholder="Pseudo" required>
