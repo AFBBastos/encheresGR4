@@ -48,7 +48,7 @@ public class EnchereRepository implements CrudInterface<Enchere>{
     }
 
     @Override
-    public void save(Enchere enchere) {
+    public int save(Enchere enchere) {
 
         // récupération de l'utilisateur
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -85,7 +85,7 @@ public class EnchereRepository implements CrudInterface<Enchere>{
         nouveauMontant = enchere.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
         System.out.println(nouveauMontant);
         jdbcTemplate.update(sql, nouveauMontant, enchereExistant.getNo_utilisateur().getNo_utilisateur());
-
+        return keyHolder.getKey().intValue();
     }
 
     @Override

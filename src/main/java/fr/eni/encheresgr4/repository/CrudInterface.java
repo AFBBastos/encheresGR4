@@ -8,7 +8,7 @@ public interface CrudInterface<T> {
 
     public List<T> findAll();
 
-    public void save(T t);
+    public int save(T t);
 
     public void delete(T t);
 

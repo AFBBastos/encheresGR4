@@ -6,13 +6,16 @@ import fr.eni.encheresgr4.service.CategorieService;
 import fr.eni.encheresgr4.service.EnchereService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -44,12 +47,14 @@ public class ArticleVenduController {
         return "articleVendu/ajouter";
   }
 
-
     @PostMapping("/ajouter")
-    public String ajouterPost(Model model, ArticleVendu article) {
-
+    public String ajouterPost(@Valid Model model, BindingResult result, RedirectAttributes redirectAttributes, ArticleVendu article) {
+        if(result.hasErrors()) {
+            redirectAttributes.addFlashAttribute( "org.springframework.validation.BindingResult.articleVendu", result);
+            redirectAttributes.addFlashAttribute("articleVendu", article);
+            return "articleVendu/ajouter";
+        }
         articlesVendusService.ajouterArticleVendu(article);
-
         return "redirect:/ventes";
     }
 
