@@ -3,13 +3,13 @@ package fr.eni.encheresgr4.controller;
 import fr.eni.encheresgr4.model.*;
 import fr.eni.encheresgr4.service.ArticleVenduService;
 import fr.eni.encheresgr4.service.CategorieService;
+import fr.eni.encheresgr4.service.EnchereService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArticleVenduController {
 
     private final CategorieService categorieService;
-    private ArticleVenduService articlesVendusService;
+    private final ArticleVenduService articlesVendusService;
+    private final EnchereService enchereService;
 
-    public ArticleVenduController(ArticleVenduService articlesVendusService, CategorieService categorieService) {
+    public ArticleVenduController(ArticleVenduService articlesVendusService, CategorieService categorieService, EnchereService enchereService) {
         this.articlesVendusService = articlesVendusService;
         this.categorieService = categorieService;
+        this.enchereService = enchereService;
     }
 
     @GetMapping("/ajouter")
@@ -74,14 +76,11 @@ public class ArticleVenduController {
 
         ArticleVendu articleVendu = articlesVendusService.findOneById(id);
         Enchere enchere = new Enchere();
-        Enchere dernierEnchere = null;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur currentUtilisateur = (Utilisateur) authentication.getPrincipal();
 
-        // TODO A MODIF SUR S003 et S004
-//        Enchere dernierEnchere = null;
-//        dernierEnchere = new Enchere(new Date(), 100, currentUser, articleVendu);
+        Enchere dernierEnchere = enchereService.findAllByArticle(id).stream().findFirst().orElse(null);
 
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("enchere", enchere);

@@ -13,8 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Repository
@@ -51,17 +50,17 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     @Override
     public void save(ArticleVendu articleVendu) {
         MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("no_article", articleVendu.getNo_article())
-                .addValue("nom_article", articleVendu.getNom_article())
-                .addValue("description", articleVendu.getDescription())
-                .addValue("date_debut_encheres", articleVendu.getDate_debut_encheres())
-                .addValue("date_fin_encheres", articleVendu.getDate_fin_encheres())
-                .addValue("prix_initial", articleVendu.getPrix_initial())
-                .addValue("prix_vente", articleVendu.getPrix_vente())
-                .addValue("etat_vente", articleVendu.getEtat_vente())
-                .addValue("no_categorie", articleVendu.getNo_categorie().getNo_categorie())
-                .addValue("no_utilisateur", articleVendu.getNo_utilisateur().getNo_utilisateur())
-                ;
+            .addValue("no_article", articleVendu.getNo_article())
+            .addValue("nom_article", articleVendu.getNom_article())
+            .addValue("description", articleVendu.getDescription())
+            .addValue("date_debut_encheres", articleVendu.getDate_debut_encheres())
+            .addValue("date_fin_encheres", articleVendu.getDate_fin_encheres())
+            .addValue("prix_initial", articleVendu.getPrix_initial())
+            .addValue("prix_vente", articleVendu.getPrix_vente())
+            .addValue("etat_vente", articleVendu.getEtat_vente())
+            .addValue("no_categorie", articleVendu.getNo_categorie().getNo_categorie())
+            .addValue("no_utilisateur", articleVendu.getNo_utilisateur().getNo_utilisateur())
+        ;
         if (articleVendu.getNo_article() == 0){
             // ajout
             String sql =   "INSERT INTO public.articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat_vente)" +
@@ -97,19 +96,17 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
 
         @Override
         public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
             ArticleVendu articleVendu = new ArticleVendu();
             articleVendu.setNo_article(rs.getInt("no_article"));
             articleVendu.setNom_article(rs.getString("nom_article"));
             articleVendu.setDescription(rs.getString("description"));
-            articleVendu.setDate_debut_encheres(LocalDateTime.parse(rs.getString("date_debut_encheres"),formatter));
-            articleVendu.setDate_fin_encheres(LocalDateTime.parse(rs.getString("date_fin_encheres"),formatter));
+            articleVendu.setDate_debut_encheres(OffsetDateTime.parse(rs.getString("date_debut_encheres").replace( " " , "T")).toLocalDateTime());
+            articleVendu.setDate_fin_encheres(OffsetDateTime.parse(rs.getString("date_fin_encheres").replace( " " , "T")).toLocalDateTime());
             articleVendu.setPrix_initial(rs.getInt("prix_initial"));
             articleVendu.setPrix_vente(rs.getInt("prix_vente"));
             articleVendu.setEtat_vente(rs.getString("etat_vente"));
             articleVendu.setNo_categorie(categorieRepository.findOneById(rs.getInt("no_categorie")));
-            System.out.println(utilisateurRepository.findOneById(rs.getInt("no_utilisateur")));
             articleVendu.setNo_utilisateur(utilisateurRepository.findOneById(rs.getInt("no_utilisateur")));
             return articleVendu;
         }
