@@ -72,6 +72,7 @@ public class EnchereRepository implements CrudInterface<Enchere>{
         // recup l'id auto générer
         int id = (int) keyHolder.getKey();
 
+        // retire le montant
         sql = "UPDATE utilisateurs " +
                 "SET credit = ? " +
                 "WHERE no_utilisateur = ?;";
@@ -79,12 +80,16 @@ public class EnchereRepository implements CrudInterface<Enchere>{
         System.out.println(nouveauMontant);
         jdbcTemplate.update(sql, nouveauMontant, currentUser.getNo_utilisateur());
 
-        sql = "UPDATE utilisateurs " +
-                "SET credit = ? " +
-                "WHERE no_utilisateur = ?;";
-        nouveauMontant = enchere.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
-        System.out.println(nouveauMontant);
-        jdbcTemplate.update(sql, nouveauMontant, enchereExistant.getNo_utilisateur().getNo_utilisateur());
+        // rebourse le montant
+
+        if (null != enchereExistant){
+            sql = "UPDATE utilisateurs " +
+                    "SET credit = ? " +
+                    "WHERE no_utilisateur = ?;";
+            nouveauMontant = enchere.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
+            System.out.println(nouveauMontant);
+            jdbcTemplate.update(sql, nouveauMontant, enchereExistant.getNo_utilisateur().getNo_utilisateur());
+        }
 
     }
 
