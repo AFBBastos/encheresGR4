@@ -47,7 +47,7 @@ public class ArticleVenduController {
 
     @PostMapping("/ajouter")
     public String ajouterPost(Model model, ArticleVendu article) {
-
+        System.out.println(article.toString());
         articlesVendusService.ajouterArticleVendu(article);
 
         return "redirect:/ventes";
