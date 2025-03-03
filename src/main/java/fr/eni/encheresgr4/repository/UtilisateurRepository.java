@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -13,6 +12,7 @@ public class UtilisateurRepository implements CrudInterface<Utilisateur> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     public Utilisateur findByPseudo(String pseudo) {
         String sql = "SELECT * FROM utilisateurs WHERE pseudo = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
