@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modification profil</title>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+
+  <style>
+    .error{
+      color:red;
+      font-weight:bold;
+      background-color:#ffdada;
+      padding:10px;
+      border: 1px solid red;
+      border-radius:5px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body class="ui container">
+
+  <div th:insert="~{accueil/headers :: body}"></div>
+  <div style="margin-top:5%;">
+    <form th:action="@{'/utilisateur/modifier'}" method="post">
+      <h1 style="text-align:center;margin-bottom:5%">Mon profil</h1>
+      <div class="container" style="display: inline-block;text-align:right;margin-left:15%;">
+        <p><strong>Pseudo</strong> <input type="text" style="margin-left:50px;" id="pseudo" name="pseudo" th:value="${currentUser.pseudo}"></p>
+        <p><strong>Prénom</strong> <input type="text" style="margin-left:50px;" id="name" name="name" th:value="${currentUser.prenom}"></p>
+        <p><strong>Téléphone</strong> <input type="text" style="margin-left:50px;" id="tel" name="telephone" th:value="${currentUser.telephone}"></p>
+        <p><strong>Code postal</strong> <input type="text" style="margin-left:50px;" id="cp" name="code-postal" th:value="${currentUser.code_postal}"></p>
+        <p><strong>Mot de passe actuel</strong> <input type="password" style="margin-left:50px;" id="mdp" name="mot-de-passe" th:value="${currentUser.mot_de_passe}"></p>
+        <p><strong>Nouveau mot de passe</strong> <input type="password" style="margin-left:50px;" id="new-mdp" name="new-mot-de-passe"></p>
+        <p><strong>Crédit</strong> [[${currentUser.credit}]]</p>
+        <button class="ui primary button" role="submit">Enregistrer</button>
+      </div>
+
+      <div class="container" style="display: inline-block; float:right;margin-right:20%;">
+        <div class="container" style="text-align:right;">
+          <p><strong>Nom</strong> <input type="text" style="margin-left:50px;" id="last-name" name="last-name" th:value="${currentUser.nom}"></p>
+          <p><strong>Email</strong> <input type="text" style="margin-left:50px;" id="email" name="email" th:value="${currentUser.email}"></p>
+          <p><strong>Rue</strong> <input type="text" style="margin-left:50px;" id="rue" name="rue" th:value="${currentUser.rue}"></p>
+          <p><strong>Ville</strong> <input type="text" style="margin-left:50px;margin-bottom: 35px;" id="ville" name="ville" th:value="${currentUser.ville}"></p>
+          <p><strong>Confirmation</strong></strong> <input type="password" style="margin-left:50px;" id="new-mdp-confirm" name="new-mot-de-passe-confirm"></p>
+          <div th:if="${erreur}" class="error" th:text="${erreur}"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

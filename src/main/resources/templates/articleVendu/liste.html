@@ -11,9 +11,9 @@
 </head>
 
 <body class="ui container">
-    <div th:replace="accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
     <div class="ui center aligned icon header">
-        <form th:action="@{'/ventes/rechercher'}" method="post">
+        <form th:action="@{'/rechercher'}" method="post">
             <div class="ui input">
                 <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
             </div>
@@ -39,7 +39,7 @@
                 <div class="header"><a th:href="@{/ventes/{id}(id=${articleVendu.no_article})}" th:text="${articleVendu.nom_article}"></a></div>
                 <div class="description">
                     Prix : <th th:text="${articleVendu.prix_initial}"></th> points <br/>
-                    Fin de l'enchère : <th th:text="${articleVendu.date_fin_encheres}"></th>
+                    Fin de l'enchère : <th th:text="${#temporals.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></th>
                 </div>
             </div>
             <div class="extra content">

@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
 </head>
 <body class="ui container ">
+<div th:insert="~{accueil/headers :: body}"></div>
 <h1 class="ui center aligned header">Nouvelle vente</h1>
 <div class="ui two column stackable grid segment" style="padding: 1rem !important">
     <div class="item six wide column">
@@ -16,13 +17,12 @@
         </div>
     </div>
     <div class="ten wide column" >
-        <form class="ui form error" th:object="${article}">
+        <form class="ui form" th:object="${article}" method="post" th:action="@{/ventes/ajouter}">
+            <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUser.no_utilisateur}">
             <div class="row">
                 <label>Article :</label>
                 <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
             </div>
-
-<!--            Je suis en train de faire l'insertion des "@blank" dans les attributs + inscription repository"-->
             <div class="ui error message">
                 <p th:each="err : ${#fields.errors('nom_article')}" th:text="${err}" class="error"></p>
             </div>
@@ -38,10 +38,11 @@
             <div class="row">
                 <label for="categorie">Catégorie :</label>
                 <select id="categorie" th:field="*{no_categorie}" required>
-                    <option value="">Sélectionnez une catégorie</option>
-                    <option value="electronique">Électronique</option>
-                    <option value="vetements">Vêtements</option>
-                    <option value="maison">Maison</option>
+                    <option value="0">Pas de catégorie sélectionnée</option>
+                    <option th:each="categorie : ${categories}"
+                            th:text="${categorie.libelle}"
+                            th:value="${categorie.no_categorie}">
+                    </option>
                 </select>
             </div>
             <div class="row">
@@ -79,7 +80,7 @@
             </div>
             <div class="row" >
                 <button type="submit"  class="ui inverted primary button">Enregistrer</button>
-                <button type="submit"  class="ui inverted green button">Soumettre</button>
+                <a href="/ventes"  class="ui inverted orange button">Annuler</a>
             </div>
         </form>
     </div>
