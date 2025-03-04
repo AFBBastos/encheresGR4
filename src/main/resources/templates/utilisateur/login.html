@@ -24,20 +24,27 @@
                 <input id="password" name="password" rows="2" cols="20"
                        placeholder="Votre mot de passe" required/>
             </div>
-            <div class="row ui two column stackable grid">
-                <div class="ui one column stackable">
-                    <button type="submit" class="ui inverted primary button">Se connecter</button>
-                </div>
-                <div class="ui one column stackable">
-                    <div class="row">
+            <div class="row ui two column stackable grid" style="padding-top: 1rem">
+                <!--                <div class="ui one column stackable" >-->
+                <div class="row">
+                    <div class="row ui one column">
+                        <button type="submit" class="ui inverted primary button">Se connecter</button>
+                    </div>
+                    <div class="row ui one column">
                         <div class="ui checkbox">
                             <input type="checkbox" name="rappel">
                             <label>Se souvenir de moi</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <a href="#">Mot de passe oublié</a>
-                    </div>
+                </div>
+            </div>
+            <div class="row ui two column stackable grid" >
+                <!--                <div class="ui one column stackable" >-->
+                <div class="one column">
+                    <a href="/inscription" class="ui inverted green button">Créer un compte</a>
+                </div>
+                <div class="one column">
+                    <a href="#">Mot de passe oublié</a>
                 </div>
             </div>
         </form>

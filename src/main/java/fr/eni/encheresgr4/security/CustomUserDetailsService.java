@@ -20,9 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {
-//        System.out.println("-----------loadUserByUsername-----------");
-//        return new Utilisateur(1, "Noix", "HRV", "Noä", "noa.hervieu2024@campus-eni.fr", "0123456789", "6 rue de la chose", "44100", "Nantes", "$2a$10$svoHqpiTs2crtaNSCDgmk.rzYxaGH.357BimFaLqZd2Ok6vmHXpqa", 200, true);
-
 
         Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
         if (utilisateur == null) {

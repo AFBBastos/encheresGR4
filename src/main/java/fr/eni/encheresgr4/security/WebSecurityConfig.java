@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -25,11 +26,11 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/inscription").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/inscription").permitAll()
                         .anyRequest().authenticated()
                 )
-
                 .formLogin((form)-> form.loginPage("/login").permitAll())
-
                 .logout((logout) -> logout.logoutUrl("/logout").permitAll())
         ;
         return http.build();
@@ -38,9 +39,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-
         return authenticationManagerBuilder.build();
     }
 

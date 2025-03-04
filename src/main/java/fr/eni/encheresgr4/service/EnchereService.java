@@ -30,7 +30,7 @@ public class EnchereService implements CrudInterface<Enchere> {
     }
 
     @Override
-    public void save(Enchere enchere) {
+    public int save(Enchere enchere) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
@@ -50,6 +50,7 @@ public class EnchereService implements CrudInterface<Enchere> {
         }
 
         enchereRepository.save(enchere);
+        return enchere.getNo_article().getNo_article();
     }
 
     @Override

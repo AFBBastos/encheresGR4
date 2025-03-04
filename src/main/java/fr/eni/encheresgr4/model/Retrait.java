@@ -1,9 +1,18 @@
 package fr.eni.encheresgr4.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Retrait {
 
+    @NotBlank(message = "Veuillez saisir une rue")
     private String rue;
+
+    @NotBlank(message = "Veuillez saisir un code postal")
+    @Size(min = 5, max = 5, message = "Le code postal dois comporter exactement 5 chiffres")
     private String code_postal;
+
+    @NotBlank(message = "Veuillez saisir une ville")
     private String ville;
 
     private int no_article;

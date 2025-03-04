@@ -1,9 +1,13 @@
 package fr.eni.encheresgr4.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 public class Enchere {
     private LocalDateTime date_enchere;
+
+    @NotBlank(message = "Veuillez saisir un montant")
     private int montant_enchere;
 
     private Utilisateur no_utilisateur;
