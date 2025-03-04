@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ArticleVenduService {
+public class ArticleVenduService implements ArticleVenduInterface {
 
     @Autowired
     ArticleVenduRepository repository;
@@ -18,19 +18,23 @@ public class ArticleVenduService {
     @Autowired
     UtilisateurRepository utilisateurRepository;
 
+    @Override
     public void ajouterArticleVendu(ArticleVendu articleVendu) {
         articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(articleVendu.getNo_utilisateur().getPseudo()));
         repository.save(articleVendu);
     }
 
+    @Override
     public ArticleVendu findOneById(int id) {
         return repository.findOneById(id);
     }
 
+    @Override
     public List<ArticleVendu> findAllArticleVendu() {
         return repository.findAll();
     }
 
+    @Override
     public List<ArticleVendu> listAllArticleVenduByName(String filterName, int filterCategory) {
         List<ArticleVendu> articleVendusByName = new ArrayList<>();
         List<ArticleVendu> data = repository.findAll();

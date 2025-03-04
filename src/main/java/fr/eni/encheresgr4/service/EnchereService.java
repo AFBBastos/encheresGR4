@@ -14,20 +14,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class EnchereService implements CrudInterface<Enchere> {
+public class EnchereService implements EnchereInterface {
 
     @Autowired
     private EnchereRepository enchereRepository;
-
-    @Override
-    public Enchere findOneById(int id) {
-        return null;
-    }
-
-    @Override
-    public List<Enchere> findAll() {
-        return List.of();
-    }
 
     @Override
     public int save(Enchere enchere) {
@@ -54,10 +44,6 @@ public class EnchereService implements CrudInterface<Enchere> {
     }
 
     @Override
-    public void delete(Enchere enchere) {
-
-    }
-
     public List<Enchere> findAllByArticle(int id) {
         return enchereRepository.findAllByArticle(id);
     }
