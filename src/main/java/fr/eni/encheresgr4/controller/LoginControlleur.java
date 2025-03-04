@@ -20,7 +20,6 @@ public class LoginControlleur {
     @GetMapping("/login")
     public String loginGET() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        System.out.println(bCryptPasswordEncoder.encode("azerty"));
         return "utilisateur/login";

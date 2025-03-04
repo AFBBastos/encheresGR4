@@ -19,16 +19,16 @@
 
         <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
             <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
-                <h1 class="ui center aligned header">Vous avez remporté la vente</h1>
+                <h2 class="ui center aligned header">Vous avez remporté la vente</h2>
             </div>
             <div th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur}">
-                <h1 class="ui center aligned header" th:text="${articleVendu.no_utilisateur.pseudo} + ' a remporté la vente'"></h1>
+                <h2 class="ui center aligned header" th:text="${articleVendu.no_utilisateur.pseudo} + ' a remporté la vente'"></h2>
             </div>
         </div>
 
         <div class="ui two column stackable grid segment">
             <div class="four wide column">
-                <img class="ui medium image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PS2-Versions.png/800px-PS2-Versions.png" alt="Image de la ps2">
+                <img class="ui medium image" th:src="@{'/articleImages/' + ${articleVendu.image}}" th:alt="'Image de ' + ${articleVendu.nom_article}">
             </div>
             <div class="twelve wide column">
                 <div class="segment">
@@ -49,8 +49,8 @@
                     </p>
                     <p class="ui text">Mise à prix : <span th:text="${articleVendu.prix_initial}"></span> pts</p>
                     <div class="" th:if="${articleVendu.etat_vente} eq 'En cours'">
-                        <p class="ui text">Début de l'enchère : <span th:text="${#dates.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
-                        <p class="ui text">Fin de l'enchère : <span th:text="${#dates.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text">Début de l'enchère : <span th:text="${#temporals.format(articleVendu.date_debut_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
+                        <p class="ui text">Fin de l'enchère : <span th:text="${#temporals.format(articleVendu.date_fin_encheres, 'dd MMM yyyy HH:mm')}"></span></p>
                         <p class="ui text"></p>
                     </div>
                     <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
@@ -64,7 +64,7 @@
                             <button class="ui inverted green button">Enchérir</button>
                         </div>
                     </form>
-                    <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">Modifier</a>
+                    <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'" th:href="@{/ventes/modification/{id}(id=${articleVendu.no_article})}">Modifier</a>
                 </div>
             </div>
         </div>

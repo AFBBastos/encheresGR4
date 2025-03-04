@@ -1,6 +1,5 @@
 package fr.eni.encheresgr4.controller;
 
-import fr.eni.encheresgr4.model.Categorie;
 import fr.eni.encheresgr4.model.Utilisateur;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

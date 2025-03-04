@@ -2,6 +2,7 @@ package fr.eni.encheresgr4.service;
 
 import fr.eni.encheresgr4.model.ArticleVendu;
 import fr.eni.encheresgr4.repository.ArticleVenduRepository;
+import fr.eni.encheresgr4.repository.RetraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +13,44 @@ import java.util.List;
 public class ArticleVenduService {
 
     @Autowired
-    ArticleVenduRepository repository;
+    ArticleVenduRepository articleRepository;
 
-    public void ajouterArticleVendu(ArticleVendu articleVendu) {
-        repository.save(articleVendu);
+    @Autowired
+    RetraitRepository retraitRepository;
+
+    public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu) {
+
+        articleRepository.save(articleVendu);
+
+        if(articleVendu.getNo_article() == 0){
+            retraitRepository.save(articleRepository.takeTheLastResult().getNo_article(), articleVendu);
+            return articleRepository.takeTheLastResult();
+        }
+        else{
+            retraitRepository.save(articleVendu.getNo_article(), articleVendu);
+            return articleVendu;
+        }
+    }
+
+    public void supprimerArticleVendu(int id) {
+        articleRepository.delete(id);
     }
 
     public ArticleVendu findOneById(int id) {
-        return repository.findOneById(id);
+        return articleRepository.findOneById(id);
+    }
+
+    public List<ArticleVendu> getAllImageName() {
+        return articleRepository.getAllImageName();
     }
 
     public List<ArticleVendu> findAllArticleVendu() {
-        return repository.findAll();
+        return articleRepository.findAll();
     }
 
     public List<ArticleVendu> listAllArticleVenduByName(String filterName, int filterCategory) {
         List<ArticleVendu> articleVendusByName = new ArrayList<>();
-        List<ArticleVendu> data = repository.findAll();
+        List<ArticleVendu> data = articleRepository.findAll();
         for (ArticleVendu articleVendu : data) {
             String nomArticleVendu = articleVendu.getNom_article().toLowerCase();
             filterName = filterName.toLowerCase();

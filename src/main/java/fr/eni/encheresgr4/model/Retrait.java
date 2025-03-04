@@ -15,8 +15,18 @@ public class Retrait {
         this.no_article = no_article;
     }
 
+    public Retrait(String rue, String code_postal, String ville) {
+        this.rue = rue;
+        this.code_postal = code_postal;
+        this.ville = ville;
+    }
+
     public Retrait() {
     }
+
+    public int getNo_article() { return no_article;  }
+
+    public void setNo_article(int no_article) { this.no_article = no_article; }
 
     public String getRue() {
         return rue;

@@ -10,6 +10,6 @@ public interface CrudInterface<T> {
 
     public void save(T t);
 
-    public void delete(T t);
+    public void delete(int id);
 
 }

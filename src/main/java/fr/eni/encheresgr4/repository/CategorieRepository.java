@@ -42,7 +42,7 @@ public class CategorieRepository implements CrudInterface<Categorie> {
     }
 
     @Override
-    public void delete(Categorie categorie) {
+    public void delete(int id) {
 
     }
 

@@ -12,6 +12,7 @@ public class ArticleVendu {
     private int prix_initial;
     private int prix_vente;
     private String etat_vente = "En cours";
+    private String image;
 
     private Categorie no_categorie;
     private Retrait lieuRetrait;
@@ -26,7 +27,8 @@ public class ArticleVendu {
                         int prix_vente,
                         String etat_vente,
                         Categorie no_categorie,
-                        Utilisateur no_utilisateur) {
+                        Utilisateur no_utilisateur,
+                        String image) {
         this.no_article = no_article;
         this.nom_article = nom_article;
         this.description = description;
@@ -37,6 +39,7 @@ public class ArticleVendu {
         this.etat_vente = etat_vente;
         this.no_categorie = no_categorie;
         this.no_utilisateur = no_utilisateur;
+        this.image = image;
     }
 
     public ArticleVendu(int no_article,
@@ -48,7 +51,8 @@ public class ArticleVendu {
                         int prix_vente,
                         String etat_vente,
                         Categorie no_categorie,
-                        Retrait lieuRetrait) {
+                        Retrait lieuRetrait,
+                        String image) {
         this.no_article = no_article;
         this.nom_article = nom_article;
         this.description = description;
@@ -59,6 +63,7 @@ public class ArticleVendu {
         this.etat_vente = etat_vente;
         this.no_categorie = no_categorie;
         this.lieuRetrait = lieuRetrait;
+        this.image = image;
     }
 
     public ArticleVendu() {
@@ -152,17 +157,29 @@ public class ArticleVendu {
         this.no_utilisateur = no_utilisateur;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "ArticleVendu{" +
-                "noArticle='" + no_article + '\'' +
-                ", nomArticle='" + nom_article + '\'' +
+                "no_article=" + no_article +
+                ", nom_article='" + nom_article + '\'' +
                 ", description='" + description + '\'' +
-                ", dateDebutEncheres=" + date_debut_encheres +
-                ", dateFinEncheres=" + date_fin_encheres +
-                ", miseAPrix=" + prix_initial +
-                ", prixVente=" + prix_vente +
-                ", etatVente='" + etat_vente + '\'' +
+                ", date_debut_encheres=" + date_debut_encheres +
+                ", date_fin_encheres=" + date_fin_encheres +
+                ", prix_initial=" + prix_initial +
+                ", prix_vente=" + prix_vente +
+                ", etat_vente='" + etat_vente + '\'' +
+                ", image='" + image + '\'' +
+                ", no_categorie=" + no_categorie +
+                ", lieuRetrait=" + lieuRetrait +
+                ", no_utilisateur=" + no_utilisateur +
                 '}';
     }
 }
