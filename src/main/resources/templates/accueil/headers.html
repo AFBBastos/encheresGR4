@@ -5,20 +5,26 @@
     <title>Header</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div style="display:inline-block;">
-                <h1>ENI-Encheres</h1>
-            </div>
-            <div style="display:inline-block;float:right; margin-top:10px;">
+<header>
+    <nav class="ui three column stackable grid segment" >
+        <div class="four wide column ui form left aligned horizontally centered">
+            <h1>ENI-Encheres</h1>
+        </div>
+        <div class="two wide column"></div>
+        <div class="ten wide column ui form right aligned horizontally centered">
+            <div class="row">
                 <a href="/">Enchères</a>
-                - <a href="/ventes/ajouter">Vendre un article</a>
-                - <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
-                - <form th:action="@{/logout}" method="post">
-                    <input th:type="submit" value="Déconnexion">
-            </form>
+                <span>-</span>
+                <a href="/ventes/ajouter">Vendre un article</a>
+                <span>-</span>
+                <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
+                <span>-</span>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button class="button-as-link" type="submit">Déconnexion</button>
+                </form>
             </div>
-        </nav>
-    </header>
- </body>
+        </div>
+    </nav>
+</header>
+</body>
 </html>
