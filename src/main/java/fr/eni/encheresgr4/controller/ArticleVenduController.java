@@ -67,6 +67,10 @@ public class ArticleVenduController {
 
     @PostMapping("/rechercher")
     public String filtrerArticleVendu(@RequestParam("filter-name") String filterByName, @RequestParam("categorie-select") int filterByCategorie, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("categories", categorieService.findAllCategorie());
         model.addAttribute("articlesVendus", articlesVendusService.listAllArticleVenduByName(filterByName, filterByCategorie));
         return "articleVendu/liste";
