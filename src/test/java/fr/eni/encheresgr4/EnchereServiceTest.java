@@ -7,7 +7,6 @@ import fr.eni.encheresgr4.model.Enchere;
 import fr.eni.encheresgr4.model.Utilisateur;
 import fr.eni.encheresgr4.repository.EnchereRepository;
 import fr.eni.encheresgr4.service.EnchereService;
-import fr.eni.encheresgr4.service.UtilisateurService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +17,12 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class EnchereServiceTest {
 
     @MockitoBean
     private EnchereRepository enchereRepository;
-
-//    @MockitoBean
-//    private SecurityContextHolder securityContextHolder;
 
     @Autowired
     private EnchereService enchereService;
@@ -36,20 +31,20 @@ public class EnchereServiceTest {
     public void testSaveGood() {
         // Création d'un utilisateur de test
         Utilisateur vendeur = new Utilisateur(1, "UserTest", "User", "TEST", "usertest@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
-        Utilisateur achteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
+        Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
         ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
 
         // Création d'un enchere
-        Enchere enchere = new Enchere(LocalDateTime.now(), 400, achteur, articleVendu);
+        Enchere enchere = new Enchere(LocalDateTime.now(), 400, acheteur, articleVendu);
 
         // Simulation de la connexion
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(
-                        achteur,
-                        achteur.getPassword(),
-                        achteur.getAuthorities()
+                        acheteur,
+                        acheteur.getPassword(),
+                        acheteur.getAuthorities()
                 )
         );
         int result = enchereService.save(enchere);
@@ -91,20 +86,20 @@ public class EnchereServiceTest {
     public void testSavePasMonnais() {
         // Création d'un utilisateur de test
         Utilisateur vendeur = new Utilisateur(1, "UserTest", "User", "TEST", "usertest@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
-        Utilisateur achteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
+        Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
         ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
 
         // Création d'une enchère
-        Enchere enchere = new Enchere(LocalDateTime.now(), 2100, achteur, articleVendu);
+        Enchere enchere = new Enchere(LocalDateTime.now(), 2100, acheteur, articleVendu);
 
         // Simulation de la connexion
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(
-                        achteur,
-                        achteur.getPassword(),
-                        achteur.getAuthorities()
+                        acheteur,
+                        acheteur.getPassword(),
+                        acheteur.getAuthorities()
                 )
         );
 
@@ -122,7 +117,7 @@ public class EnchereServiceTest {
     public void testSaveInferieur() {
         // Création d'un utilisateur de test
         Utilisateur vendeur = new Utilisateur(1, "UserTest", "User", "TEST", "usertest@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
-        Utilisateur achteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
+        Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
         ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
@@ -133,9 +128,9 @@ public class EnchereServiceTest {
         // Simulation de la connexion
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(
-                        achteur,
-                        achteur.getPassword(),
-                        achteur.getAuthorities()
+                        acheteur,
+                        acheteur.getPassword(),
+                        acheteur.getAuthorities()
                 )
         );
 
