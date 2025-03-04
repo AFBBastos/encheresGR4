@@ -2,6 +2,7 @@ package fr.eni.encheresgr4.service;
 
 import fr.eni.encheresgr4.model.ArticleVendu;
 import fr.eni.encheresgr4.repository.ArticleVenduRepository;
+import fr.eni.encheresgr4.repository.UtilisateurRepository;
 import fr.eni.encheresgr4.repository.RetraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ArticleVenduService {
+public class ArticleVenduService implements ArticleVenduInterface {
 
     @Autowired
     ArticleVenduRepository articleRepository;
@@ -18,9 +19,14 @@ public class ArticleVenduService {
     @Autowired
     RetraitRepository retraitRepository;
 
-    public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu) {
 
+    @Autowired
+    UtilisateurRepository utilisateurRepository;
+
+    public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu) {
         articleRepository.save(articleVendu);
+
+        articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(articleVendu.getNo_utilisateur().getPseudo()));
 
         if(articleVendu.getNo_article() == 0){
             retraitRepository.save(articleRepository.takeTheLastResult().getNo_article(), articleVendu);
@@ -36,6 +42,7 @@ public class ArticleVenduService {
         articleRepository.delete(id);
     }
 
+    @Override
     public ArticleVendu findOneById(int id) {
         return articleRepository.findOneById(id);
     }
@@ -44,10 +51,12 @@ public class ArticleVenduService {
         return articleRepository.getAllImageName();
     }
 
+    @Override
     public List<ArticleVendu> findAllArticleVendu() {
         return articleRepository.findAll();
     }
 
+    @Override
     public List<ArticleVendu> listAllArticleVenduByName(String filterName, int filterCategory) {
         List<ArticleVendu> articleVendusByName = new ArrayList<>();
         List<ArticleVendu> data = articleRepository.findAll();

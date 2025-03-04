@@ -37,8 +37,8 @@ public class CategorieRepository implements CrudInterface<Categorie> {
     }
 
     @Override
-    public void save(Categorie categorie) {
-
+    public int save(Categorie categorie) {
+        return 0;
     }
 
     @Override

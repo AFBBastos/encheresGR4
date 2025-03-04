@@ -1,18 +1,35 @@
 package fr.eni.encheresgr4.model;
 
 import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.Date;
 
 public class ArticleVendu {
 
     private int no_article;
+
+    @NotBlank(message = "Veuillez saisir un nom")
     private String nom_article;
+
+    @NotBlank(message = "Veuillez saisir une description")
     private String description;
+
+    @NotBlank(message = "Veuillez selectionner une date de début")
     private LocalDateTime date_debut_encheres;
+
+    @NotBlank(message = "Veuillez selectionner une date de fin")
     private LocalDateTime date_fin_encheres;
+
+    @NotBlank(message = "Veuillez saisir un prix initial")
     private int prix_initial;
+
+    @NotBlank(message = "Veuillez saisir le prix initial de vente")
     private int prix_vente;
+
     private String etat_vente = "En cours";
     private String image;
+
 
     private Categorie no_categorie;
     private Retrait lieuRetrait;
@@ -176,7 +193,6 @@ public class ArticleVendu {
                 ", prix_initial=" + prix_initial +
                 ", prix_vente=" + prix_vente +
                 ", etat_vente='" + etat_vente + '\'' +
-                ", image='" + image + '\'' +
                 ", no_categorie=" + no_categorie +
                 ", lieuRetrait=" + lieuRetrait +
                 ", no_utilisateur=" + no_utilisateur +

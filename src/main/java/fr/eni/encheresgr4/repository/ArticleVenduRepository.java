@@ -29,11 +29,14 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     @Autowired
     private CategorieRepository categorieRepository;
 
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
     @Override
     public ArticleVendu findOneById(int id) {
         try {
             String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image from articles_vendus WHERE no_article = ?";
-            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository), id);
+            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository, utilisateurRepository), id);
         }catch (Exception e) {
             return null;
         }
@@ -44,7 +47,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
             String sql = "SELECT no_article, nom_article, description, date_debut_encheres, " +
                     "date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image " +
                     "FROM articles_vendus ORDER BY no_article DESC LIMIT 1;";
-            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository));
+            return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository, utilisateurRepository));
         }catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -63,11 +66,11 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     @Override
     public List<ArticleVendu> findAll() {
         String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image from articles_vendus";
-        return jdbcTemplate.query(sql, new rowMapper(categorieRepository));
+        return jdbcTemplate.query(sql, new rowMapper(categorieRepository, utilisateurRepository));
     }
 
     @Override
-    public void save(ArticleVendu articleVendu) {
+    public int save(ArticleVendu articleVendu) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("no_article", articleVendu.getNo_article())
                 .addValue("nom_article", articleVendu.getNom_article())
@@ -88,6 +91,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"no_article"});
             // recup l'id auto générer
+            return (keyHolder.getKey()) == null ? 0 : keyHolder.getKey().intValue();
         }else{
             // modif
             String sql =    "UPDATE articles_vendus " +
@@ -96,6 +100,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
                     "WHERE no_article = :no_article;";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"no_article"});
+            return (keyHolder.getKey()) == null ? 0 : keyHolder.getKey().intValue();
         }
     }
 
@@ -116,9 +121,11 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     static class rowMapper implements RowMapper<ArticleVendu> {
 
         private CategorieRepository categorieRepository;
+        private UtilisateurRepository utilisateurRepository;
 
-        public rowMapper(CategorieRepository categorieRepository) {
+        public rowMapper(CategorieRepository categorieRepository, UtilisateurRepository utilisateurRepository) {
             this.categorieRepository = categorieRepository;
+            this.utilisateurRepository = utilisateurRepository;
         }
 
         public rowMapper() {
@@ -137,8 +144,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
             articleVendu.setEtat_vente(rs.getString("etat_vente"));
             articleVendu.setImage(rs.getString("image"));
             articleVendu.setNo_categorie(categorieRepository.findOneById(rs.getInt("no_categorie")));
-            // TODO A CHANGER AVEC LE REPO USER
-            articleVendu.setNo_utilisateur(new Utilisateur(1, "Noix", "HRV", "Noä", "noa.hervieu2024@campus-eni.fr", "0123456789", "6 rue de la chose", "44100", "Nantes", "Mot2p@ssTè6qrizé", 200, true));
+            articleVendu.setNo_utilisateur(utilisateurRepository.findOneById(rs.getInt("no_utilisateur")));
             return articleVendu;
         }
     }

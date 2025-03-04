@@ -2,9 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire d'enchère</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
@@ -14,7 +12,7 @@
 
 <body class="ui container ">
 
-    <div th:replace="accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
 
     <h1 th:if="${modificationOuAjout} eq 'ajout'" class="ui center aligned header">Nouvelle vente</h1>
     <h1 th:if="${modificationOuAjout} eq 'modification'" class="ui center aligned header">Modification vente</h1>
@@ -29,17 +27,24 @@
             </div>
         </div>
         <div class="ten wide column" >
-            <form id="articleForm" class="ui form" action="/ventes/ajouter" th:object="${article}" method="post">
-                <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUtilisateur.no_utilisateur}">
+            <form id="articleForm" class="ui form" th:action="@{/ventes/ajouter} th:object="${article}" method="post">
+                <input type="hidden" id="user" th:field="*{no_utilisateur}" required th:value="${currentUser.no_utilisateur}">
                 <input type="hidden" id="no_article" th:field="*{no_article}" required th:value="${article.no_article}">
                 <div class="row">
                     <label>Article :</label>
                     <input type="text" id="article" th:field="*{nom_article}" placeholder="Nom de l'article" required>
                 </div>
+                <div class="ui error message">
+                    <p th:each="err : ${#fields.errors('nom_article')}" th:text="${err}" class="error"></p>
+                </div>
                 <div class="row">
                     <label for="description">Description :</label>
                     <textarea id="description" th:field="*{description}" rows="2" cols="20" placeholder="Description détailée" required></textarea>
                 </div>
+                <div th:if="${#fields.errors('description').isEmpty()}" class="ui error message">
+                    <p th:each="err : ${#fields.errors('description')}" th:text="${err}" class="error"></p>
+                </div>
+
                 <div class="row" th:if="${modificationOuAjout} eq 'ajout'">
                     <label for="categorie">Catégorie :</label>
                     <select id="categorie" th:field="*{no_categorie}" required>
@@ -68,7 +73,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <label for="prix">Mise à prix :</label>
+                    <label for="prix">Prix initial :</label>
                     <input type="number" id="prix" th:field="*{prix_initial}" min="0" step="1" placeholder="Prix initial" required>
                 </div>
                 <div class="row">

@@ -1,8 +1,12 @@
 package fr.eni.encheresgr4.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Categorie {
 
     private int no_categorie;
+
+    @NotBlank(message = "Veuillez saisir une categorie")
     private String libelle;
 
     public Categorie(int noCategorie, String libelle) {

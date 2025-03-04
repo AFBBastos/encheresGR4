@@ -9,20 +9,23 @@
 </head>
 <body class="ui container">
 
-    <div th:replace="/accueil/headers :: commonHeader"></div>
+    <div th:insert="~{accueil/headers :: body}"></div>
     <div th:if="${articleVendu == null}">
         <h1 class="ui center aligned header">404 - Article non trouvé</h1>
     </div>
-
     <div th:if="${articleVendu != null}">
         <h1 class="ui center aligned header">Détail vente</h1>
-
         <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
             <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
                 <h2 class="ui center aligned header">Vous avez remporté la vente</h2>
             </div>
-            <div th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur}">
-                <h2 class="ui center aligned header" th:text="${articleVendu.no_utilisateur.pseudo} + ' a remporté la vente'"></h2>
+            <div th:if="${dernierEnchere} == null">
+                <h1 class="ui center aligned header">Personne a remporté la vente</h1>
+            </div>
+            <div th:if="${dernierEnchere} != null">
+                <div th:if="${currentUser.no_utilisateur} neq ${dernierEnchere.no_utilisateur.no_utilisateur}">
+                    <h1 class="ui center aligned header" th:text="${dernierEnchere.no_utilisateur.pseudo} + ' a remporté la vente'"></h1>
+                </div>
             </div>
         </div>
 
@@ -40,7 +43,7 @@
                     </div>
                     <p class="ui text">Meilleur offre :
                         <span th:if="${dernierEnchere} == null">
-                        <span th:text="${articleVendu.prix_vente}"></span>
+                        <span th:text="${articleVendu.prix_initial}"></span>
                     pts
                     </span>
                         <span th:if="${dernierEnchere} != null">
@@ -55,11 +58,19 @@
                     </div>
                     <p class="ui text">Retrait : <span th:text="${articleVendu.lieuRetrait?.rue}"></span> <span th:text="${articleVendu.lieuRetrait?.code_postal}"></span> <span th:text="${articleVendu.lieuRetrait?.ville}"></span></p>
                     <p class="ui text">Vendeur : <span th:text="${articleVendu.no_utilisateur.pseudo}"></span></p>
-                    <form class="ui form" th:object="${enchere}" method="post" th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">
-                        <div class="field">
+                    <form th:class="'ui ' + (${errorEnchereMontant != null && !errorEnchereMontant.isEmpty() ? 'error' : ''}) + ' form'"
+                          th:action="'/encheres/' + ${articleVendu.no_article}"
+                          th:object="${enchere}"
+                          method="post"
+                          th:if="${currentUser.no_utilisateur} neq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours' and ${currentUser.no_utilisateur} neq ${dernierEnchere?.no_utilisateur?.no_utilisateur}">
+
+                        <div th:class="'field ' + (${errorEnchereMontant != null && !errorEnchereMontant.isEmpty() ? 'error' : ''})">
                             <div class="three wide field">
                                 <label for="proposition">Ma proposition : </label>
                                 <input id="proposition" type="number" th:field="*{montant_enchere}" th:value="${articleVendu.prix_vente}">
+                                <div class="ui error message" th:if="${errorEnchereMontant != null && !errorEnchereMontant.isEmpty()}">
+                                    <p th:text="${errorEnchereMontant}"></p>
+                                </div>
                             </div>
                             <button class="ui inverted green button">Enchérir</button>
                         </div>
