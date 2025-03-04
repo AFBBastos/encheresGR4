@@ -18,7 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -53,9 +52,10 @@ public class EnchereRepository implements CrudInterface<Enchere>{
         // récupération de l'utilisateur
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+        currentUser = utilisateurRepository.findOneById(currentUser.getNo_utilisateur());
         // récupération du dernier enchere
         List<Enchere> encheres = this.findAllByArticle(enchere.getNo_article().getNo_article());
-        Enchere enchereExistant = encheres.isEmpty() ? new Enchere() : encheres.get(0);
+        Enchere enchereExistant = encheres.isEmpty() ? null : encheres.get(0);
 
         MapSqlParameterSource params = new MapSqlParameterSource()
             .addValue("date_enchere", LocalDateTime.now())
@@ -63,28 +63,31 @@ public class EnchereRepository implements CrudInterface<Enchere>{
             .addValue("no_article", enchere.getNo_article().getNo_article())
             .addValue("no_utilisateur", enchere.getNo_utilisateur().getNo_utilisateur())
         ;
+
+        // retire le montant
+        String sql = "UPDATE utilisateurs " +
+                "SET credit = ? " +
+                "WHERE no_utilisateur = ?;";
+        int nouveauMontantRetirer = currentUser.getCredit() - enchere.getMontant_enchere();
+        jdbcTemplate.update(sql, nouveauMontantRetirer, currentUser.getNo_utilisateur());
+
+        // rebourse le montant
+        if (null != enchereExistant){
+            sql = "UPDATE utilisateurs " +
+                    "SET credit = ? " +
+                    "WHERE no_utilisateur = ?;";
+            int nouveauMontantRemb = enchereExistant.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
+            jdbcTemplate.update(sql, nouveauMontantRemb, enchereExistant.getNo_utilisateur().getNo_utilisateur());
+        }
+
         // ajout
 
-        String sql = "insert into encheres (date_enchere, montant_enchere, no_article, no_utilisateur) " +
-            "values (:date_enchere, :montant_enchere, :no_article, :no_utilisateur);";
+        sql = "insert into encheres (date_enchere, montant_enchere, no_article, no_utilisateur) " +
+                "values (:date_enchere, :montant_enchere, :no_article, :no_utilisateur);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"no_article"});
         // recup l'id auto générer
         int id = (int) keyHolder.getKey();
-
-        sql = "UPDATE utilisateurs " +
-                "SET credit = ? " +
-                "WHERE no_utilisateur = ?;";
-        int nouveauMontant = currentUser.getCredit() - enchere.getMontant_enchere();
-        System.out.println(nouveauMontant);
-        jdbcTemplate.update(sql, nouveauMontant, currentUser.getNo_utilisateur());
-
-        sql = "UPDATE utilisateurs " +
-                "SET credit = ? " +
-                "WHERE no_utilisateur = ?;";
-        nouveauMontant = enchere.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
-        System.out.println(nouveauMontant);
-        jdbcTemplate.update(sql, nouveauMontant, enchereExistant.getNo_utilisateur().getNo_utilisateur());
         return keyHolder.getKey().intValue();
     }
 
