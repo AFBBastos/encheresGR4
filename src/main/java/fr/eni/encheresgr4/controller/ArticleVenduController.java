@@ -48,12 +48,8 @@ public class ArticleVenduController {
   }
 
     @PostMapping("/ajouter")
-    public String ajouterPost(@Valid Model model, BindingResult result, RedirectAttributes redirectAttributes, ArticleVendu article) {
-        if(result.hasErrors()) {
-            redirectAttributes.addFlashAttribute( "org.springframework.validation.BindingResult.articleVendu", result);
-            redirectAttributes.addFlashAttribute("articleVendu", article);
-            return "articleVendu/ajouter";
-        }
+    public String ajouterPost(ArticleVendu article) {
+
         articlesVendusService.ajouterArticleVendu(article);
         return "redirect:/ventes";
     }
