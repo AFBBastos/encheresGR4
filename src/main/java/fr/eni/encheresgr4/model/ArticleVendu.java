@@ -28,6 +28,7 @@ public class ArticleVendu {
     private int prix_vente;
 
     private String etat_vente = "En cours";
+    private String image;
 
 
     private Categorie no_categorie;
@@ -43,7 +44,8 @@ public class ArticleVendu {
                         int prix_vente,
                         String etat_vente,
                         Categorie no_categorie,
-                        Utilisateur no_utilisateur) {
+                        Utilisateur no_utilisateur,
+                        String image) {
         this.no_article = no_article;
         this.nom_article = nom_article;
         this.description = description;
@@ -54,6 +56,7 @@ public class ArticleVendu {
         this.etat_vente = etat_vente;
         this.no_categorie = no_categorie;
         this.no_utilisateur = no_utilisateur;
+        this.image = image;
     }
 
     public ArticleVendu(int no_article,
@@ -65,7 +68,8 @@ public class ArticleVendu {
                         int prix_vente,
                         String etat_vente,
                         Categorie no_categorie,
-                        Retrait lieuRetrait) {
+                        Retrait lieuRetrait,
+                        String image) {
         this.no_article = no_article;
         this.nom_article = nom_article;
         this.description = description;
@@ -76,6 +80,7 @@ public class ArticleVendu {
         this.etat_vente = etat_vente;
         this.no_categorie = no_categorie;
         this.lieuRetrait = lieuRetrait;
+        this.image = image;
     }
 
     public ArticleVendu() {
@@ -167,6 +172,14 @@ public class ArticleVendu {
 
     public void setNo_utilisateur(Utilisateur no_utilisateur) {
         this.no_utilisateur = no_utilisateur;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

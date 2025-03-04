@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ArticleVenduInterface {
 
-    public void ajouterArticleVendu(ArticleVendu articleVendu);
+    public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu);
 
     public ArticleVendu findOneById(int id);
 
