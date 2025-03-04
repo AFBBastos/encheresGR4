@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UtilisateurService {
+public class UtilisateurService implements UtilisateurInterface {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
