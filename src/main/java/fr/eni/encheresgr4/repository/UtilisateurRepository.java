@@ -118,7 +118,7 @@ public class UtilisateurRepository implements CrudInterface<Utilisateur> {
     }
 
     @Override
-    public void delete(Utilisateur utilisateur) {
+    public void delete(int id) {
         String sql = "DELETE FROM utilisateurs WHERE no_utilisateur = ?";
     }
 

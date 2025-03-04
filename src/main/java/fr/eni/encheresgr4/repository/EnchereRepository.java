@@ -92,7 +92,7 @@ public class EnchereRepository implements CrudInterface<Enchere>{
     }
 
     @Override
-    public void delete(Enchere enchere) {
+    public void delete(int id) {
 
     }
 
