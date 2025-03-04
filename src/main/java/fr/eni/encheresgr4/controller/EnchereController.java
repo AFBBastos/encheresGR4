@@ -41,7 +41,6 @@ public class EnchereController {
         try {
             enchereService.save(enchere);
         }catch (EnchereException e){
-            System.out.println("ERREUR TRY CATCH !!!!");
             model.addAttribute("errorEnchereMontant", e.getMessage());
             model.addAttribute("articleVendu", articleVendu);
             model.addAttribute("currentUser", currentUser);

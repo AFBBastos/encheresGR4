@@ -77,7 +77,6 @@ public class EnchereRepository implements CrudInterface<Enchere>{
                 "SET credit = ? " +
                 "WHERE no_utilisateur = ?;";
         int nouveauMontant = currentUser.getCredit() - enchere.getMontant_enchere();
-        System.out.println(nouveauMontant);
         jdbcTemplate.update(sql, nouveauMontant, currentUser.getNo_utilisateur());
 
         // rebourse le montant
@@ -87,7 +86,6 @@ public class EnchereRepository implements CrudInterface<Enchere>{
                     "SET credit = ? " +
                     "WHERE no_utilisateur = ?;";
             nouveauMontant = enchere.getNo_utilisateur().getCredit() + enchereExistant.getMontant_enchere();
-            System.out.println(nouveauMontant);
             jdbcTemplate.update(sql, nouveauMontant, enchereExistant.getNo_utilisateur().getNo_utilisateur());
         }
 

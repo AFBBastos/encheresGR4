@@ -49,10 +49,6 @@ public class EnchereService implements CrudInterface<Enchere> {
             throw new EnchereException("Vous ne pouvez pas encherir sur votre propre vente");
         }
 
-        System.out.println("Ajout en cours...");
-
-        System.out.println(enchereExistant);
-
         enchereRepository.save(enchere);
     }
 

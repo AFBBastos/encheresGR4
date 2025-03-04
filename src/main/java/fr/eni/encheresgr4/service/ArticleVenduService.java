@@ -2,6 +2,7 @@ package fr.eni.encheresgr4.service;
 
 import fr.eni.encheresgr4.model.ArticleVendu;
 import fr.eni.encheresgr4.repository.ArticleVenduRepository;
+import fr.eni.encheresgr4.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,11 @@ public class ArticleVenduService {
     @Autowired
     ArticleVenduRepository repository;
 
+    @Autowired
+    UtilisateurRepository utilisateurRepository;
+
     public void ajouterArticleVendu(ArticleVendu articleVendu) {
+        articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(articleVendu.getNo_utilisateur().getPseudo()));
         repository.save(articleVendu);
     }
 

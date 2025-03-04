@@ -155,14 +155,17 @@ public class ArticleVendu {
     @Override
     public String toString() {
         return "ArticleVendu{" +
-                "noArticle='" + no_article + '\'' +
-                ", nomArticle='" + nom_article + '\'' +
+                "no_article=" + no_article +
+                ", nom_article='" + nom_article + '\'' +
                 ", description='" + description + '\'' +
-                ", dateDebutEncheres=" + date_debut_encheres +
-                ", dateFinEncheres=" + date_fin_encheres +
-                ", miseAPrix=" + prix_initial +
-                ", prixVente=" + prix_vente +
-                ", etatVente='" + etat_vente + '\'' +
+                ", date_debut_encheres=" + date_debut_encheres +
+                ", date_fin_encheres=" + date_fin_encheres +
+                ", prix_initial=" + prix_initial +
+                ", prix_vente=" + prix_vente +
+                ", etat_vente='" + etat_vente + '\'' +
+                ", no_categorie=" + no_categorie +
+                ", lieuRetrait=" + lieuRetrait +
+                ", no_utilisateur=" + no_utilisateur +
                 '}';
     }
 }

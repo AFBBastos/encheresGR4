@@ -61,7 +61,6 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
             .addValue("no_categorie", articleVendu.getNo_categorie().getNo_categorie())
             .addValue("no_utilisateur", articleVendu.getNo_utilisateur().getNo_utilisateur())
         ;
-        System.out.println(articleVendu.getNo_utilisateur().getNo_utilisateur());
         if (articleVendu.getNo_article() == 0){
             // ajout
             String sql =   "INSERT INTO public.articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, etat_vente)" +
