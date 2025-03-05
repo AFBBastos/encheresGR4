@@ -13,14 +13,14 @@
         <div class="two wide column"></div>
         <div class="ten wide column ui form right aligned horizontally centered">
             <div class="row">
-                <a href="/">Enchères</a>
+                <a class="ui black tertiary button" href="/">Enchères</a>
                 <span>-</span>
-                <a href="/ventes/ajouter">Vendre un article</a>
+                <a class="ui black tertiary button" href="/ventes/ajouter">Vendre un article</a>
                 <span>-</span>
-                <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
+                <a class="ui black tertiary button" th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
                 <span>-</span>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button class="button-as-link" type="submit">Déconnexion</button>
+                    <button class="ui black tertiary button" class="button-as-link" type="submit">Déconnexion</button>
                 </form>
             </div>
         </div>
