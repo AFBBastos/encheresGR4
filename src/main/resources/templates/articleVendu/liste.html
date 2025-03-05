@@ -5,19 +5,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
 
-<!--<style>-->
-<!--    .ui.input input {-->
-<!--        height: 38px; /* Hauteur spécifique */-->
-<!--    }-->
+<style>
+    .ui.input input {
+        height: 38px;
+    }
 
-<!--    .ui.selection.dropdown {-->
-<!--        height: 38px !important;-->
-<!--        min-height: 38px !important;-->
-<!--        padding: 0 10px;-->
-<!--        display: flex;-->
-<!--        align-items: center;-->
-<!--    }-->
-<!--</style>-->
+    .ui.selection.dropdown {
+        height: 38px !important;
+        padding: 0 10px;
+    }
+</style>
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +29,7 @@
                 <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
             </div>
 
-            <select class="ui selection dropdown paddingless borderless" id="categorie-select" name="categorie-select">
+            <select class="ui selection dropdown borderless" id="categorie-select" name="categorie-select">
                 <option value="0">Pas de catégorie sélectionnée</option>
                 <option th:each="categorie : ${categories}"
                         th:text="${categorie.libelle}"
@@ -40,7 +37,7 @@
                 </option>
             </select>
 
-            <button type="submit">Enregistrer</button>
+            <button type="submit" class="ui green primary button">Enregistrer</button>
         </form>
     </div>
 
