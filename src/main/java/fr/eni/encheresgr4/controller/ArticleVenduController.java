@@ -1,10 +1,8 @@
 package fr.eni.encheresgr4.controller;
 
 import fr.eni.encheresgr4.model.*;
-import fr.eni.encheresgr4.service.ArticleVenduService;
-import fr.eni.encheresgr4.service.CategorieService;
-import fr.eni.encheresgr4.service.RetraitService;
-import fr.eni.encheresgr4.service.EnchereService;
+import fr.eni.encheresgr4.repository.UtilisateurRepository;
+import fr.eni.encheresgr4.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import jakarta.validation.Valid;
@@ -29,12 +27,14 @@ public class ArticleVenduController {
     private final ArticleVenduService articlesVendusService;
     private final EnchereService enchereService;
     private final RetraitService retraitService;
+    private final UtilisateurRepository utilisateurRepository;
 
-    public ArticleVenduController(ArticleVenduService articlesVendusService, CategorieService categorieService, RetraitService retraitService, EnchereService enchereService) {
+    public ArticleVenduController(ArticleVenduService articlesVendusService, CategorieService categorieService, RetraitService retraitService, EnchereService enchereService, UtilisateurRepository utilisateurRepository) {
         this.articlesVendusService = articlesVendusService;
         this.categorieService = categorieService;
         this.retraitService = retraitService;
         this.enchereService = enchereService;
+        this.utilisateurRepository = utilisateurRepository;
     }
 
     @GetMapping("/ajouter")
@@ -74,6 +74,7 @@ public class ArticleVenduController {
     public String listeArticleVendu(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+        currentUser = utilisateurRepository.findByPseudo(currentUser.getPseudo());
 
         model.addAttribute("articlesVendus", articlesVendusService.findAllArticleVendu());
         model.addAttribute("categories", categorieService.findAllCategorie());
