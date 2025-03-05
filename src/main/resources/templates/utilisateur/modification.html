@@ -1,53 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" name="viewport">
     <title>Modification profil</title>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
 
-  <style>
-    .error{
-      color:red;
-      font-weight:bold;
-      background-color:#ffdada;
-      padding:10px;
-      border: 1px solid red;
-      border-radius:5px;
-      margin-bottom: 15px;
-    }
-  </style>
 </head>
 <body class="ui container">
 
   <div th:insert="~{accueil/headers :: body}"></div>
-  <div style="margin-top:5%;">
-    <form th:action="@{'/utilisateur/modifier'}" method="post">
-      <input type="hidden" th:field="${currentUser.no_utilisateur}">
-      <h1 style="text-align:center;margin-bottom:5%">Mon profil</h1>
-      <div class="container" style="display: inline-block;text-align:right;margin-left:15%;">
-        <p><label for="pseudo"> <strong>Pseudo</strong> </label> <input type="text" style="margin-left:50px;" id="pseudo" th:field="${currentUser.pseudo}" th:value="${currentUser.pseudo}"></p>
-        <p><label for="prenom"> <strong>Prénom</strong> </label> <input type="text" style="margin-left:50px;" id="prenom" th:field="${currentUser.prenom}" th:value="${currentUser.prenom}"></p>
-        <p><label for="tel"> <strong>Téléphone</strong> </label> <input type="text" style="margin-left:50px;" id="tel" th:field="${currentUser.telephone}" th:value="${currentUser.telephone}"></p>
-        <p><label for="cp"> <strong>Code postal</strong> </label> <input type="text" style="margin-left:50px;" id="cp" th:field="${currentUser.code_postal}" th:value="${currentUser.code_postal}"></p>
-        <p><label for="new-mdp"> <strong>Nouveau mot de passe</strong> </label> <input type="password" style="margin-left:50px;" id="new-mdp" name="new-mot-de-passe"></p>
+  <h1 class="ui center aligned header">Mon profil</h1>
+  <form class="ui form" th:action="@{'/utilisateur/modifier'}" method="post">
+    <div class="ui two column stackable grid segment">
+      <div class="eight wide column">
+        <input type="hidden" th:field="${currentUser.no_utilisateur}">
+        <div class="row">
+          <label for="pseudo">Pseudo</label>
+          <input type="text" id="pseudo" th:field="${currentUser.pseudo}" th:value="${currentUser.pseudo}">
+        </div>
+        <div class="row">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" th:field="${currentUser.prenom}" th:value="${currentUser.prenom}">
+        </div>
+        <div class="row">
+          <label for="tel">Téléphone</label>
+          <input type="text" id="tel" th:field="${currentUser.telephone}" th:value="${currentUser.telephone}">
+        </div>
+        <div class="row">
+          <label for="cp">Code postal</label>
+          <input type="text" id="cp" th:field="${currentUser.code_postal}" th:value="${currentUser.code_postal}">
+        </div>
+        <div class="row">
+          <label for="new-mdp">Nouveau mot de passe</label>
+          <input type="password" id="new-mdp" name="new-mot-de-passe">
+        </div>
         <p><strong>Crédit</strong> [[${currentUser.credit}]]</p>
         <button class="ui black button" type="submit">Enregistrer</button>
       </div>
 
-      <div class="container" style="display: inline-block; float:right;margin-right:20%;">
-        <div class="container" style="text-align:right;">
-          <p><label for="last-name"> <strong>Nom</strong> </label> <input type="text" style="margin-left:50px;" id="last-name" th:field="${currentUser.nom}" th:value="${currentUser.nom}"></p>
-          <p><label for="email"> <strong>Email</strong> </label> <input type="text" style="margin-left:50px;" id="email" th:field="${currentUser.email}" th:value="${currentUser.email}"></p>
-          <p><label for="rue"> <strong>Rue</strong> </label> <input type="text" style="margin-left:50px;" id="rue" th:field="${currentUser.rue}" th:value="${currentUser.rue}"></p>
-          <p><label for="Ville"> <strong>Ville</strong> </label> <input type="text" style="margin-left:50px;" id="ville" th:field="${currentUser.ville}" th:value="${currentUser.ville}"></p>
-          <p><label for="new-mdp-confirm"> <strong>Confirmation</strong> </label></strong> <input type="password" style="margin-left:50px;" id="new-mdp-confirm" name="new-mot-de-passe-confirm"></p>
-          <div th:if="${erreur}" class="error" th:text="${erreur}"></div>
+      <div class="eight wide column">
+        <div class="row">
+          <label for="last-name">Nom</label>
+          <input type="text" id="last-name" th:field="${currentUser.nom}" th:value="${currentUser.nom}">
         </div>
+        <div class="row">
+          <label for="email">Email</label>
+          <input type="text" id="email" th:field="${currentUser.email}" th:value="${currentUser.email}">
+        </div>
+        <div class="row">
+          <label for="rue">Rue</label>
+          <input type="text" id="rue" th:field="${currentUser.rue}" th:value="${currentUser.rue}">
+        </div>
+        <div class="row">
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" th:field="${currentUser.ville}" th:value="${currentUser.ville}">
+        </div>
+        <div class="row">
+          <label for="new-mdp-confirm">Confirmation</label>
+          <input type="password" id="new-mdp-confirm" name="new-mot-de-passe-confirm">
+        </div>
+          <div th:if="${erreur}" class="error" th:text="${erreur}"></div>
       </div>
-    </form>
-  </div>
-
+    </div>
+  </form>
 </body>
 </html>
