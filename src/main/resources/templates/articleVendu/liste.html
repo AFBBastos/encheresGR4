@@ -26,10 +26,11 @@
     <div class="ui center aligned icon header">
         <form th:action="@{'/ventes/rechercher'}" method="post">
             <div class="ui input">
+                <label for="name"></label>
                 <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
             </div>
 
-            <label style="display:none;" for="categorie-select">Catégorie</label>
+            <label for="categorie-select"></label>
             <select class="ui selection dropdown borderless" id="categorie-select" name="categorie-select">
                 <option value="0">Pas de catégorie sélectionnée</option>
                 <option th:each="categorie : ${categories}"
