@@ -1,10 +1,13 @@
 package fr.eni.encheresgr4.service;
 
 import fr.eni.encheresgr4.model.ArticleVendu;
+import fr.eni.encheresgr4.model.Utilisateur;
 import fr.eni.encheresgr4.repository.ArticleVenduRepository;
 import fr.eni.encheresgr4.repository.UtilisateurRepository;
 import fr.eni.encheresgr4.repository.RetraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,9 +27,11 @@ public class ArticleVenduService implements ArticleVenduInterface {
     UtilisateurRepository utilisateurRepository;
 
     public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu) {
-        articleRepository.save(articleVendu);
 
-        articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(articleVendu.getNo_utilisateur().getPseudo()));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Utilisateur currentUser = (Utilisateur) authentication.getPrincipal();
+        articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(currentUser.getPseudo()));
+        articleRepository.save(articleVendu);
 
         if(articleVendu.getNo_article() == 0){
             retraitRepository.save(articleRepository.takeTheLastResult().getNo_article(), articleVendu);
