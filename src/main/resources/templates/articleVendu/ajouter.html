@@ -20,10 +20,10 @@
     <div class="ui two column stackable grid segment" style="padding: 1rem !important">
         <div class="item six wide column">
             <div th:if="${modificationOuAjout} eq 'ajout'" class="ui card">
-                <img id="preview-image" class="ui medium rounded bordered image center aligned" style="display:none;" width="150" height="150" src="https://via.placeholder.com/150">
+                <img id="preview-image" class="ui medium rounded bordered image center aligned" style="display:none;" width="150" height="150" src="https://via.placeholder.com/150" alt="image de la vente">
             </div>
             <div th:if="${modificationOuAjout} eq 'modification'" class="ui card">
-                <img id="image-modified" class="ui medium rounded bordered image center aligned" width="150" height="150" th:field="*{article.image}" th:src="@{'/articleImages/' + ${article.image}}" >
+                <img id="image-modified" class="ui medium rounded bordered image center aligned" width="150" height="150" th:field="*{article.image}" th:src="@{'/articleImages/' + ${article.image}}"  alt="image de la vente">
             </div>
         </div>
         <div class="ten wide column" >
@@ -56,7 +56,7 @@
                     </select>
                 </div>
                 <div class="row" th:if="${modificationOuAjout} eq 'modification'">
-                    <label for="categorie">Catégorie :</label>
+                    <label for="categorie-modified">Catégorie :</label>
                     <select id="categorie-modified" th:field="*{no_categorie.no_categorie}" required>
                         <option value="0">Pas de catégorie sélectionnée</option>
                         <option th:each="categorie : ${categories}"
