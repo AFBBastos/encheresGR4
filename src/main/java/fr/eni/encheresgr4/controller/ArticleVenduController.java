@@ -125,7 +125,7 @@ public class ArticleVenduController {
         List<Categorie> categories = categorieService.findAllCategorie();
         model.addAttribute("article",articleVendu);
         model.addAttribute("categories",categories);
-        model.addAttribute("currentUtilisateur",currentUtilisateur);
+        model.addAttribute("currentUser",currentUtilisateur);
         model.addAttribute("modificationOuAjout", "modification");
 
         return "articleVendu/ajouter";
