@@ -29,7 +29,7 @@
                 <input class="prompt" type="text" id="name" name="filter-name" placeholder="Nom de l'article...">
             </div>
 
-            <label for="categorie-select"></label>
+            <label style="display:none;" for="categorie-select">Catégorie</label>
             <select class="ui selection dropdown borderless" id="categorie-select" name="categorie-select">
                 <option value="0">Pas de catégorie sélectionnée</option>
                 <option th:each="categorie : ${categories}"

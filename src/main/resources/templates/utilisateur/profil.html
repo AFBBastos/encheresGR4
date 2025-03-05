@@ -12,7 +12,7 @@
   <div th:insert="~{accueil/headers :: body}"></div>
 
   <div style="margin-top:5%;text-align: center;">
-    <h3 th:text="${currentUser.pseudo}">Pseudo : [[${currentUser.pseudo}]]</h3>
+    <h1 th:text="${currentUser.pseudo}">Pseudo : [[${currentUser.pseudo}]]</h1>
     <p><strong>Nom</strong> : [[${currentUser.nom}]]</p>
     <p><strong>Prénom</strong> : [[${currentUser.prenom}]]</p>
     <p><strong>Email</strong> : [[${currentUser.email}]]</p>
@@ -20,7 +20,7 @@
     <p><strong>Rue</strong> : [[${currentUser.rue}]]</p>
     <p><strong>Code postal</strong> : [[${currentUser.code_postal}]]</p>
     <p><strong>Ville</strong> : [[${currentUser.Ville}]]</p>
-    <a class="ui primary button" th:href="@{/utilisateur/{id}/modificationProfil(id=${currentUser.no_utilisateur})}">Modifier</a>
+    <a class="ui black button" th:href="@{/utilisateur/{id}/modificationProfil(id=${currentUser.no_utilisateur})}">Modifier</a>
   </div>
 
 </body>
