@@ -65,7 +65,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
 
     @Override
     public List<ArticleVendu> findAll() {
-        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image from articles_vendus";
+        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, no_utilisateur, image from articles_vendus";
         return jdbcTemplate.query(sql, new rowMapper(categorieRepository, utilisateurRepository));
     }
 
