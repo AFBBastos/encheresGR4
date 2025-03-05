@@ -68,7 +68,9 @@
                 <div class="row">
                     <label>Photo de l'article :</label>
                     <div class="ui file input">
+                        <label for="image-upload"></label>
                         <input th:if="${modificationOuAjout} eq 'ajout'" type="file" th:field="*{image}" id="image-upload" accept="image/*" required>
+                        <label for="image-upload-modified"></label>
                         <input th:if="${modificationOuAjout} eq 'modification'" type="file" th:field="*{image}" id="image-upload-modified" accept="image/*">
                     </div>
                 </div>
@@ -85,7 +87,7 @@
                     <input type="datetime-local" id="fin" name="date_fin_encheres" th:value="${article.date_fin_encheres}" required>
                 </div>
                 <div class="ui segment">
-                    <h4 class="ui left header">Adresse</h4>
+                    <h2 class="ui left header">Adresse</h2>
                     <div>
                         <label for="rue">Rue :</label>
                         <input type="text" id="rue" name="rue" th:value="${article.lieuRetrait.rue}" placeholder="Rue">
@@ -100,12 +102,12 @@
                     </div>
                 </div>
                 <div th:if="${modificationOuAjout} eq 'ajout'" class="row">
-                    <button type="submit"  class="ui primary button">Enregistrer</button>
-                    <a href="/ventes"  class="ui orange button">Annuler</a>
+                    <button type="submit"  class="ui black button">Enregistrer</button>
+                    <a href="/ventes"  class="ui red button">Annuler</a>
                 </div>
                 <div th:if="${modificationOuAjout} eq 'modification'" class="row">
-                    <button type="submit"  class="ui primary button">Modifier</button>
-                    <a th:href="@{/ventes/delete/{id}(id=${article.no_article})}" class="ui orange button">Annuler la vente</a>
+                    <button type="submit"  class="ui black button">Modifier</button>
+                    <a th:href="@{/ventes/delete/{id}(id=${article.no_article})}" class="ui red button">Annuler la vente</a>
                 </div>
             </form>
         </div>
