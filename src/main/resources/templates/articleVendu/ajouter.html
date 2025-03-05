@@ -67,9 +67,9 @@
                 </div>
                 <div class="row">
                     <div class="ui file input">
-                        <label for="image-upload"></label>
+                        <label for="image-upload">Image :</label>
                         <input th:if="${modificationOuAjout} eq 'ajout'" type="file" th:field="*{image}" id="image-upload" accept="image/*" required>
-                        <label for="image-upload-modified"></label>
+                        <label for="image-upload-modified">Image :</label>
                         <input th:if="${modificationOuAjout} eq 'modification'" type="file" th:field="*{image}" id="image-upload-modified" accept="image/*">
                     </div>
                 </div>
