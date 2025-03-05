@@ -35,7 +35,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     @Override
     public ArticleVendu findOneById(int id) {
         try {
-            String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image from articles_vendus WHERE no_article = ?";
+            String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, no_utilisateur, image from articles_vendus WHERE no_article = ?";
             return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository, utilisateurRepository), id);
         }catch (Exception e) {
             return null;
@@ -45,7 +45,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
     public ArticleVendu takeTheLastResult() {
         try {
             String sql = "SELECT no_article, nom_article, description, date_debut_encheres, " +
-                    "date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image " +
+                    "date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, no_utilisateur, image " +
                     "FROM articles_vendus ORDER BY no_article DESC LIMIT 1;";
             return jdbcTemplate.queryForObject(sql, new rowMapper(categorieRepository, utilisateurRepository));
         }catch (Exception e) {
@@ -65,7 +65,7 @@ public class ArticleVenduRepository implements CrudInterface<ArticleVendu> {
 
     @Override
     public List<ArticleVendu> findAll() {
-        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, image from articles_vendus";
+        String sql = "select no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, etat_vente, no_utilisateur, image from articles_vendus";
         return jdbcTemplate.query(sql, new rowMapper(categorieRepository, utilisateurRepository));
     }
 

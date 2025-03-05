@@ -11,12 +11,12 @@
                 <h1>ENI-Encheres</h1>
             </div>
             <div style="display:inline-block;float:right; margin-top:10px;">
-                <a href="/">Enchères</a>
-                - <a href="/ventes/ajouter">Vendre un article</a>
-                - <a th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
+                <a class="ui black tertiary button" href="/">Enchères</a>
+                - <a class="ui black tertiary button" href="/ventes/ajouter">Vendre un article</a>
+                - <a class="ui black tertiary button" th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
                 - <form th:action="@{/logout}" method="post">
-                    <input th:type="submit" value="Déconnexion">
-            </form>
+                    <input class="ui black tertiary button" th:type="submit" value="Déconnexion">
+                </form>
             </div>
         </nav>
     </header>
