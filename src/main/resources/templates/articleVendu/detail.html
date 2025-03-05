@@ -17,7 +17,7 @@
         <h1 class="ui center aligned header">Détail vente</h1>
         <div th:if="${articleVendu.etat_vente} eq 'Enchères terminées'">
             <div th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur}">
-                <h1 class="ui center aligned header">Vous avez remporté la vente</h1>
+                <h2 class="ui center aligned header">Vous avez remporté la vente</h2>
             </div>
             <div th:if="${dernierEnchere} == null">
                 <h1 class="ui center aligned header">Personne a remporté la vente</h1>
@@ -31,7 +31,7 @@
 
         <div class="ui two column stackable grid segment">
             <div class="four wide column">
-                <img class="ui medium image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PS2-Versions.png/800px-PS2-Versions.png" alt="Image de la ps2">
+                <img class="ui medium image" th:src="@{'/articleImages/' + ${articleVendu.image}}" th:alt="'Image de ' + ${articleVendu.nom_article}">
             </div>
             <div class="twelve wide column">
                 <div class="segment">
@@ -75,7 +75,7 @@
                             <button class="ui inverted green button">Enchérir</button>
                         </div>
                     </form>
-                    <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'">Modifier</a>
+                    <a class="ui inverted blue button" th:if="${currentUser.no_utilisateur} eq ${articleVendu.no_utilisateur.no_utilisateur} and ${articleVendu.etat_vente} eq 'En cours'" th:href="@{/ventes/modification/{id}(id=${articleVendu.no_article})}">Modifier</a>
                 </div>
             </div>
         </div>

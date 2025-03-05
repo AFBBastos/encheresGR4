@@ -3,6 +3,7 @@ package fr.eni.encheresgr4.service;
 import fr.eni.encheresgr4.model.ArticleVendu;
 import fr.eni.encheresgr4.repository.ArticleVenduRepository;
 import fr.eni.encheresgr4.repository.UtilisateurRepository;
+import fr.eni.encheresgr4.repository.RetraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,30 +11,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ArticleVenduService {
+public class ArticleVenduService implements ArticleVenduInterface {
 
     @Autowired
-    ArticleVenduRepository repository;
+    ArticleVenduRepository articleRepository;
+
+    @Autowired
+    RetraitRepository retraitRepository;
+
 
     @Autowired
     UtilisateurRepository utilisateurRepository;
 
-    public void ajouterArticleVendu(ArticleVendu articleVendu) {
+    public ArticleVendu ajouterArticleVendu(ArticleVendu articleVendu) {
+        articleRepository.save(articleVendu);
+
         articleVendu.setNo_utilisateur(utilisateurRepository.findByPseudo(articleVendu.getNo_utilisateur().getPseudo()));
-        repository.save(articleVendu);
+
+        if(articleVendu.getNo_article() == 0){
+            retraitRepository.save(articleRepository.takeTheLastResult().getNo_article(), articleVendu);
+            return articleRepository.takeTheLastResult();
+        }
+        else{
+            retraitRepository.save(articleVendu.getNo_article(), articleVendu);
+            return articleVendu;
+        }
     }
 
+    public void supprimerArticleVendu(int id) {
+        articleRepository.delete(id);
+    }
+
+    @Override
     public ArticleVendu findOneById(int id) {
-        return repository.findOneById(id);
+        return articleRepository.findOneById(id);
     }
 
+    public List<ArticleVendu> getAllImageName() {
+        return articleRepository.getAllImageName();
+    }
+
+    @Override
     public List<ArticleVendu> findAllArticleVendu() {
-        return repository.findAll();
+        return articleRepository.findAll();
     }
 
+    @Override
     public List<ArticleVendu> listAllArticleVenduByName(String filterName, int filterCategory) {
         List<ArticleVendu> articleVendusByName = new ArrayList<>();
-        List<ArticleVendu> data = repository.findAll();
+        List<ArticleVendu> data = articleRepository.findAll();
         for (ArticleVendu articleVendu : data) {
             String nomArticleVendu = articleVendu.getNom_article().toLowerCase();
             filterName = filterName.toLowerCase();
