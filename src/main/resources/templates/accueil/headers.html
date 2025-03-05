@@ -20,7 +20,7 @@
                 <a class="ui black tertiary button" th:href="@{/utilisateur/{id}(id=${currentUser.no_utilisateur})}">Mon profil</a>
                 <span>-</span>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
-                    <button class="ui black tertiary button" class="button-as-link" type="submit">Déconnexion</button>
+                    <button class="ui black tertiary button" type="submit">Déconnexion</button>
                 </form>
             </div>
         </div>
