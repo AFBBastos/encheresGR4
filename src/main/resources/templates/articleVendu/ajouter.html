@@ -100,12 +100,12 @@
                     </div>
                 </div>
                 <div th:if="${modificationOuAjout} eq 'ajout'" class="row">
-                    <button type="submit"  class="ui inverted primary button">Enregistrer</button>
-                    <a href="/ventes"  class="ui inverted orange button">Annuler</a>
+                    <button type="submit"  class="ui primary button">Enregistrer</button>
+                    <a href="/ventes"  class="ui orange button">Annuler</a>
                 </div>
                 <div th:if="${modificationOuAjout} eq 'modification'" class="row">
-                    <button type="submit"  class="ui inverted primary button">Modifier</button>
-                    <a th:href="@{/ventes/delete/{id}(id=${article.no_article})}" class="ui inverted orange button">Annuler la vente</a>
+                    <button type="submit"  class="ui primary button">Modifier</button>
+                    <a th:href="@{/ventes/delete/{id}(id=${article.no_article})}" class="ui orange button">Annuler la vente</a>
                 </div>
             </form>
         </div>
