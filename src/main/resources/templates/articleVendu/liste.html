@@ -46,7 +46,7 @@
     <div class="ui link cards">
         <div class="card" th:each="articleVendu : ${articlesVendus}">
             <div class="image">
-<!--                <img th:alt="'image_'.${articleVendu.nomArticle}" th:src="'/static/'.${articleVendu.noArticle}.'.png'">-->
+                <img class="ui smal image" th:src="@{'/articleImages/' + ${articleVendu.image}}" th:alt="'Image de ' + ${articleVendu.nom_article}">
             </div>
             <div class="content">
                 <div class="header"><a style="color:maroon;" th:href="@{/ventes/{id}(id=${articleVendu.no_article})}" th:text="${articleVendu.nom_article}"></a></div>

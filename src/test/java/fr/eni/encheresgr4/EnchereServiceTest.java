@@ -34,7 +34,7 @@ public class EnchereServiceTest {
         Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
-        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
+        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur,"");
 
         // Création d'un enchere
         Enchere enchere = new Enchere(LocalDateTime.now(), 400, acheteur, articleVendu);
@@ -58,7 +58,7 @@ public class EnchereServiceTest {
         Utilisateur vendeur = new Utilisateur(1, "UserTest", "User", "TEST", "usertest@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
-        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
+        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur,"");
 
         // Création d'une enchère
         Enchere enchere = new Enchere(LocalDateTime.now(), 400, vendeur, articleVendu);
@@ -89,7 +89,7 @@ public class EnchereServiceTest {
         Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
-        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
+        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur, "");
 
         // Création d'une enchère
         Enchere enchere = new Enchere(LocalDateTime.now(), 2100, acheteur, articleVendu);
@@ -120,7 +120,7 @@ public class EnchereServiceTest {
         Utilisateur acheteur = new Utilisateur(2, "UserTest2", "User", "TEST", "usertest2@gmail.com", "0123456789", "5 rue des tests", "14000", "Caen", "azerty", 1000, false);
 
         // Création d'un article vendu
-        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur);
+        ArticleVendu articleVendu = new ArticleVendu(1, "PS4", "Une ps4", LocalDateTime.now(), LocalDateTime.now(), 100, 0, "En cours", new Categorie(1, "Informatique"), vendeur,"");
 
         // Création d'une enchère
         Enchere enchere = new Enchere(LocalDateTime.now(), 50, vendeur, articleVendu);

@@ -65,13 +65,17 @@
                         </option>
                     </select>
                 </div>
-                <div class="row">
-                    <div class="ui file input">
-                        <label for="image-upload">Image :</label>
-                        <input th:if="${modificationOuAjout} eq 'ajout'" type="file" th:field="*{image}" id="image-upload" accept="image/*" required>
-                        <label for="image-upload-modified">Image :</label>
-                        <input th:if="${modificationOuAjout} eq 'modification'" type="file" th:field="*{image}" id="image-upload-modified" accept="image/*">
-                    </div>
+                <div class="row" th:if="${modificationOuAjout} eq 'ajout'">
+                    <label for="image-upload">Image :</label>
+                </div>
+                <div class="row ui file input" th:if="${modificationOuAjout} eq 'ajout'">
+                    <input type="file" th:field="*{image}" id="image-upload" accept="image/*" required>
+                </div>
+                <div class="row" th:if="${modificationOuAjout} eq 'modification'">
+                    <label for="image-upload-modified">Image :</label>
+                </div>
+                <div class="row ui file input" th:if="${modificationOuAjout} eq 'modification'">
+                    <input  type="file" th:field="*{image}" id="image-upload-modified" accept="image/*">
                 </div>
                 <div class="row">
                     <label for="prix">Prix initial :</label>
